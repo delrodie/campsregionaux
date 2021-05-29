@@ -75,7 +75,7 @@ class HomeController extends AbstractController
     {
         $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionSlug]);
         $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['slug'=>$slug]);
-        $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]);
+        $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region->getId()], ['id'=>"DESC"]);
         $montant = $this->gestionRegion->montantParticipation($region->getId()); //dd($montant);
 
 
