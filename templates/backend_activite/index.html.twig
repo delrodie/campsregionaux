@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activite index{% endblock %}
+
+{% block body %}
+    <h1>Activite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Montant</th>
+                <th>Lieu</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>Logo</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activite in activites %}
+            <tr>
+                <td>{{ activite.id }}</td>
+                <td>{{ activite.nom }}</td>
+                <td>{{ activite.montant }}</td>
+                <td>{{ activite.lieu }}</td>
+                <td>{{ activite.debut }}</td>
+                <td>{{ activite.fin }}</td>
+                <td>{{ activite.logo }}</td>
+                <td>{{ activite.createdAt ? activite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('backend_activite_show', {'id': activite.id}) }}">show</a>
+                    <a href="{{ path('backend_activite_edit', {'id': activite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_activite_new') }}">Create new</a>
+{% endblock %}
