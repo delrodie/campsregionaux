@@ -33,10 +33,16 @@ class InscriptionController extends AbstractController
 
         $slug = strtoupper($this->validForm($request->get('inscription_scout')));
         $groupeId = strtoupper($this->validForm($request->get('inscription_groupe')));
+        $regionsSlug = strtoupper($this->validForm($request->get('inscription_region')));
+        $activiteId = strtoupper($this->validForm($request->get('inscription_activite')));
 
         $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['slug' => $slug]);
 
         if ($scout){
+            // Recherche des entittés
+            $groupe = $this->getDoctrine()->getRepository(Groupe::class)->findOneBy(['id'=>$groupeId]);
+            $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionsSlug]);
+            $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['id'=>$activiteId]);
             // enregistrement dans la table paiement;
             // redirection vers la page de confirmation selon la region
         }

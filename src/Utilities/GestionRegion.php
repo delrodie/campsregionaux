@@ -4,6 +4,7 @@
 namespace App\Utilities;
 
 
+use App\Entity\Activite;
 use App\Entity\Sygesca\Region;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -72,5 +73,26 @@ class GestionRegion
         }
 
         return $render;
+    }
+
+    public function montantParticipation($region)
+    {
+        $activite = $this->entityManager->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]);
+        $montant = (int)$activite->getMontant()/(1-0.035);
+
+        return $this->arrondiSuperieur($montant,5);
+
+    }
+
+    /**
+     * Fonction pour arrondir au supérieur
+     *
+     * @param $nombre
+     * @param $arrondi
+     * @return float|int
+     */
+    public function arrondiSuperieur($nombre, $arrondi)
+    {
+        return ceil($nombre / $arrondi) * $arrondi;
     }
 }

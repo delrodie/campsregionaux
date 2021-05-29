@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Activite;
 use App\Entity\Sygesca\District;
 use App\Entity\Sygesca\Region;
 use App\Entity\Sygesca\Scout;
@@ -74,11 +75,17 @@ class HomeController extends AbstractController
     {
         $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionSlug]);
         $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['slug'=>$slug]);
+        $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]);
+        $montant = $this->gestionRegion->montantParticipation($region->getId()); //dd($montant);
+
+
 
         return $this->render($this->gestionRegion->renderInscription($region->getNom()),[
             'region' => $region,
             'scout' => $scout,
             'districts' => $this->getDoctrine()->getRepository(District::class)->findBy(['region'=>$region->getId()]),
+            'activite' => $activite,
+            'montant' => $montant
         ]);
     }
 }

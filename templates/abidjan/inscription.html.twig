@@ -52,6 +52,9 @@
 
                 <input type="hidden" name="inscription_region" value="{{ region.slug }}">
                 <input type="hidden" name="inscription_scout" value="{{ scout.slug }}">
+                <input type="hidden" name="inscription_activite" value="{{ activite.id }}">
+
+                <div class="mt-3 mb-5">Participation: <strong><span style="font-size: 1.7rem; color: red">{{ montant|number_format(0,'','.') }}</span> FCFA</strong></div>
                 
                 <button class="btn btn-primary">S'inscrire</button>
             </div>
