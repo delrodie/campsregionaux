@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Sygesca\Groupe;
+use App\Entity\Sygesca\Statut;
 use App\Repository\PaiementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -118,6 +119,26 @@ class Paiement
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $paieTelephone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $paieDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $paieTime;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Statut::class)
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -378,5 +399,53 @@ class Paiement
     public function setUpdatedAtValue()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getPaieTelephone(): ?string
+    {
+        return $this->paieTelephone;
+    }
+
+    public function setPaieTelephone(?string $paieTelephone): self
+    {
+        $this->paieTelephone = $paieTelephone;
+
+        return $this;
+    }
+
+    public function getPaieDate(): ?string
+    {
+        return $this->paieDate;
+    }
+
+    public function setPaieDate(?string $paieDate): self
+    {
+        $this->paieDate = $paieDate;
+
+        return $this;
+    }
+
+    public function getPaieTime(): ?string
+    {
+        return $this->paieTime;
+    }
+
+    public function setPaieTime(?string $paieTime): self
+    {
+        $this->paieTime = $paieTime;
+
+        return $this;
+    }
+
+    public function getType(): ?Statut
+    {
+        return $this->type;
+    }
+
+    public function setType(?Statut $type): self
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

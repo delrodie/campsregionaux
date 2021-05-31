@@ -114,6 +114,7 @@ class InscriptionController extends AbstractController
                 $paiement->setMontant($montant);
                 $paiement->setActivite($activite);
                 $paiement->setGroupe($groupe);
+                $paiement->setType($scout->getStatut());
 
                 $em->persist($paiement);
                 $em->flush();
