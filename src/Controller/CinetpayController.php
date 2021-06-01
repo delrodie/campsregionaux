@@ -113,7 +113,7 @@ class CinetpayController extends AbstractController
                         $participant->setPaieTelephone($cel_phone_num);
                         $participant->setSlug($paiement->getSlug());
                         $participant->setGroupe($groupe);
-                        $participant->setStatut($statut);
+                        $participant->setType($statut);
                         $participant->setActivite($activitie);
 
                         $em->persist($participant);

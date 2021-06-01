@@ -82,7 +82,8 @@ class InscriptionController extends AbstractController
                     $message = [
                         'id' => $id_transaction,
                         'status' => true,
-                        'amount' => $montant
+                        'amount' => $montant,
+                        'slug' => $verifPaiement->getSlug()
                     ];
 
                     return $this->json($message);
@@ -125,7 +126,8 @@ class InscriptionController extends AbstractController
                 $message = [
                     'id' => $id_transaction,
                     'status' => true,
-                    'amount' => $montant
+                    'amount' => $montant,
+                    'slug' => $paiement->getSlug()
                 ];
 
                 return $this->json($message);
@@ -142,11 +144,12 @@ class InscriptionController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="app_inscription_badge", methods={"GET"})
+     * @Route("/{idTransaction}", name="app_inscription_badge", methods={"GET","POST"})
      */
-    public function badge(Participant $participant)
+    public function badge($idTransaction)
     {
-        dd($participant);
+        $paiement = $this->getDoctrine()->getRepository(Paiement::class)->findOneBy(['idTransaction' => $idTransaction]);
+        dd($paiement);
     }
 
     /**

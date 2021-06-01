@@ -63,7 +63,7 @@ $().ready(function(){
                                 cancelButtonText: 'Non, prochainement',
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location = "http://sicre.scoutascci.org/inscription/"+response.slug;
+                                    window.location = "http://sicre.scoutascci.org/inscription/"+paymentInfo.cpm_trans_id;
                                 } else {
                                     window.location.reload();
                                 }
