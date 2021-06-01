@@ -348,6 +348,9 @@ class Participant
         return $this;
     }
 
+    /**
+     * @ORM\PrePersist 
+     */
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime;

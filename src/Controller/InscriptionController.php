@@ -56,7 +56,7 @@ class InscriptionController extends AbstractController
             $groupe = $this->getDoctrine()->getRepository(Groupe::class)->findOneBy(['id'=>$groupeId]);
             $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionsSlug]); //dd($region);
             $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['id'=>$activiteId]);
-            $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$scout->getId()]);
+            $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$scout->getStatut()]);
             $montant = $this->gestionRegion->montantParticipation($region->getId());
 
             // Verification de l'existence du scout dans la table paiement
