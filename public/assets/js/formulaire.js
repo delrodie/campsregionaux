@@ -36,7 +36,7 @@ $().ready(function(){
                 CinetPay.setConfig({
                     apikey: '18714242495c8ba3f4cf6068.77597603',
                     site_id: 422630,
-                    notify_url: 'http://adhesion.scoutascci.org/cinetpay/notify'
+                    notify_url: 'http://sicre.scoutascci.org/cinetpay/notify'
                 });
                 CinetPay.setSignatureData({
                     amount: response.amount,
@@ -63,7 +63,7 @@ $().ready(function(){
                                 cancelButtonText: 'Non, prochainement',
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location = "http://campsregionaux.scoutascci.org/inscription/"+response.slug;
+                                    window.location = "http://sicre.scoutascci.org/inscription/"+response.slug;
                                 } else {
                                     window.location.reload();
                                 }
