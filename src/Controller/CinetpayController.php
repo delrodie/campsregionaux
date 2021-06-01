@@ -100,7 +100,7 @@ class CinetpayController extends AbstractController
                         $participant->setMatricule($paiement->getMatricule());
                         $participant->setCarte($paiement->getCarte());
                         $participant->setNom($paiement->getNom());
-                        $participant->setPrenom($paiement->getPrenom());
+                        $participant->setPrenom($paiement->getPrenoms());
                         $participant->setSexe($paiement->getSexe());
                         $participant->setDateNaissance($paiement->getDateNaissance());
                         $participant->setLieuNaissance($paiement->getLieuNaissance());
