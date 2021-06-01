@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activite;
 use App\Entity\Paiement;
 use App\Entity\Participant;
+use App\Entity\Sygesca\District;
 use App\Entity\Sygesca\Groupe;
 use App\Entity\Sygesca\Region;
 use App\Entity\Sygesca\Scout;
@@ -150,6 +151,28 @@ class InscriptionController extends AbstractController
     {
         $paiement = $this->getDoctrine()->getRepository(Paiement::class)->findOneBy(['idTransaction' => $idTransaction]);
         dd($paiement);
+    }
+
+
+    /**
+     * @Route("/{regionSlug}/{slug}", name="app_search_result", methods={"GET"})
+     */
+    public function inscrire(Request $request, $regionSlug, $slug)
+    {
+        $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionSlug]);
+        $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['slug'=>$slug]);
+        $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region->getId()], ['id'=>"DESC"]);
+        $montant = $this->gestionRegion->montantParticipation($region->getId()); //dd($montant);
+
+
+
+        return $this->render($this->gestionRegion->renderInscription($region->getNom()),[
+            'region' => $region,
+            'scout' => $scout,
+            'districts' => $this->getDoctrine()->getRepository(District::class)->findBy(['region'=>$region->getId()]),
+            'activite' => $activite,
+            'montant' => $montant
+        ]);
     }
 
     /**

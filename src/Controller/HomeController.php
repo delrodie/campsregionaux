@@ -68,24 +68,4 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{regionSlug}/{slug}", name="app_search_result", methods={"GET","POST"})
-     */
-    public function inscription(Request $request, $regionSlug, $slug)
-    {
-        $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionSlug]);
-        $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['slug'=>$slug]);
-        $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region->getId()], ['id'=>"DESC"]);
-        $montant = $this->gestionRegion->montantParticipation($region->getId()); //dd($montant);
-
-
-
-        return $this->render($this->gestionRegion->renderInscription($region->getNom()),[
-            'region' => $region,
-            'scout' => $scout,
-            'districts' => $this->getDoctrine()->getRepository(District::class)->findBy(['region'=>$region->getId()]),
-            'activite' => $activite,
-            'montant' => $montant
-        ]);
-    }
 }
