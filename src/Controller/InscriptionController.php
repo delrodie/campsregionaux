@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Activite;
 use App\Entity\Paiement;
+use App\Entity\Participant;
 use App\Entity\Sygesca\Groupe;
 use App\Entity\Sygesca\Region;
 use App\Entity\Sygesca\Scout;
+use App\Entity\Sygesca\Statut;
 use App\Utilities\GestionRegion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,6 +56,7 @@ class InscriptionController extends AbstractController
             $groupe = $this->getDoctrine()->getRepository(Groupe::class)->findOneBy(['id'=>$groupeId]);
             $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionsSlug]); //dd($region);
             $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['id'=>$activiteId]);
+            $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$scout->getId()]);
             $montant = $this->gestionRegion->montantParticipation($region->getId());
 
             // Verification de l'existence du scout dans la table paiement
@@ -114,7 +117,7 @@ class InscriptionController extends AbstractController
                 $paiement->setMontant($montant);
                 $paiement->setActivite($activite);
                 $paiement->setGroupe($groupe);
-                $paiement->setType($scout->getStatut());
+                $paiement->setType($statut);
 
                 $em->persist($paiement);
                 $em->flush();
@@ -136,6 +139,14 @@ class InscriptionController extends AbstractController
         return $this->render('inscription/index.html.twig', [
             'controller_name' => 'InscriptionController',
         ]);
+    }
+
+    /**
+     * @Route("/{slug}", name="app_inscription_badge", methods={"GET"})
+     */
+    public function badge(Participant $participant)
+    {
+        dd($participant);
     }
 
     /**

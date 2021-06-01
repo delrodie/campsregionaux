@@ -4,7 +4,11 @@
 namespace App\Controller;
 
 
+use App\Entity\Activite;
 use App\Entity\Paiement;
+use App\Entity\Participant;
+use App\Entity\Sygesca\Groupe;
+use App\Entity\Sygesca\Statut;
 use CinetPay\CinetPay;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,8 +90,52 @@ class CinetpayController extends AbstractController
 
                         return $this->json($message);
                     }else{
+                        // Recuperer les entities
+                        $groupe = $this->getDoctrine()->getRepository(Groupe::class)->findOneBy(['id'=>$paiement->getGroupe()]);
+                        $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$paiement->getStatut()]);
+                        $activitie = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['id'=>$paiement->getActivite()]);
 
-                    }
+                        // Ajout d'un nouveau participant
+                        $participant = new Participant();
+                        $participant->setMatricule($paiement->getMatricule());
+                        $participant->setCarte($paiement->getCarte());
+                        $participant->setNom($paiement->getNom());
+                        $participant->setPrenom($paiement->getPrenom());
+                        $participant->setSexe($paiement->getSexe());
+                        $participant->setDateNaissance($paiement->getDateNaissance());
+                        $participant->setLieuNaissance($paiement->getLieuNaissance());
+                        $participant->setFonction($paiement->getFonction());
+                        $participant->setContact($paiement->getContact());
+                        $participant->setUrgence($paiement->getUrgence());
+                        $participant->setContactUrgence($paiement->getContactUrgence());
+                        $participant->setMontant($paiement->getMontant());
+                        $participant->setStatut('00');
+                        $participant->setPaieTelephone($paiement->getPaieTelephone());
+                        $participant->setSlug($paiement->getSlug());
+                        $participant->setGroupe($groupe);
+                        $participant->setStatut($statut);
+                        $participant->setActivite($activitie);
+
+                        $em->persist($participant);
+                        $em->flush();
+
+                        // Mise a jour de la table paiement
+                        $paiement->setPaieTelephone($cel_phone_num);
+                        $paiement->setPaieDate($cpm_payment_date);
+                        $paiement->setPaieTime($cpm_payment_time);
+                        $paiement->setStatut('00');
+                        $paiement->setStatusPaiement('VALID');
+
+                        $em->flush();
+
+                        $message = [
+                            'id' => $id_transaction,
+                            'matricule' => $paiement->getMatricule(),
+                            'slug' => $paiement->getSlug()
+                        ];
+
+                        return $this->json($message);
+                   }
                 }
             } catch (Exception $e){
                 echo "Erreur :" .$e->getMessage();

@@ -63,7 +63,7 @@ $().ready(function(){
                                 cancelButtonText: 'Non, prochainement',
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location = "http://adhesion.scoutascci.org/recherche/carte/";
+                                    window.location = "http://campsregionaux.scoutascci.org/inscription/"+response.slug;
                                 } else {
                                     window.location.reload();
                                 }
