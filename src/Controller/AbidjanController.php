@@ -27,7 +27,7 @@ class AbidjanController extends AbstractController
     /**
      * @Route("/", name="abidjan_index", methods={"GET","POST"})
      */
-    public function index(Request $request): Response
+    public function     index(Request $request): Response
     {
         // Recuperation de la region
         $region = $this->gestionRegion->getRegion(self::region);

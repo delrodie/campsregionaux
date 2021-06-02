@@ -33,9 +33,11 @@ $().ready(function(){
             dataType: 'json',
         }).done(function (response) {
             if (response.status === true){
+                console.log(response.apiKey)
+                console.log(response.siteId)
                 CinetPay.setConfig({
-                    apikey: '18714242495c8ba3f4cf6068.77597603',
-                    site_id: 422630,
+                    apikey: response.apiKey,
+                    site_id: response.siteId,
                     notify_url: 'http://sicre.scoutascci.org/cinetpay/notify'
                 });
                 CinetPay.setSignatureData({

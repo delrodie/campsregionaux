@@ -84,7 +84,9 @@ class InscriptionController extends AbstractController
                         'id' => $id_transaction,
                         'status' => true,
                         'amount' => $montant,
-                        'slug' => $verifPaiement->getSlug()
+                        'slug' => $verifPaiement->getSlug(),
+                        'apiKey' => '18714242495c8ba3f4cf6068.77597603',
+                        'siteId' => 422630
                     ];
 
                     return $this->json($message);
@@ -128,7 +130,9 @@ class InscriptionController extends AbstractController
                     'id' => $id_transaction,
                     'status' => true,
                     'amount' => $montant,
-                    'slug' => $paiement->getSlug()
+                    'slug' => $paiement->getSlug(),
+                    'apiKey' => '18714242495c8ba3f4cf6068.77597603',
+                    'siteId' => 422630
                 ];
 
                 return $this->json($message);
