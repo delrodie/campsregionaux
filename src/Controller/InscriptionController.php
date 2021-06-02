@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Activite;
+use App\Entity\Config;
 use App\Entity\Paiement;
 use App\Entity\Participant;
 use App\Entity\Sygesca\District;
@@ -53,12 +54,14 @@ class InscriptionController extends AbstractController
         $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['slug' => $slug]);
 
         if ($scout){
-            // Recherche des entittés
+            // Recherche des entités
             $groupe = $this->getDoctrine()->getRepository(Groupe::class)->findOneBy(['id'=>$groupeId]);
             $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionsSlug]); //dd($region);
             $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['id'=>$activiteId]);
             $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$scout->getStatut()]);
             $montant = $this->gestionRegion->montantParticipation($region->getId());
+            $config = $this->getDoctrine()->getRepository(Config::class)->findOneBy(['region'=>$region->getId()]);
+            //dd($config);
 
             // Verification de l'existence du scout dans la table paiement
             $verifPaiement = $this->getDoctrine()->getRepository(Paiement::class)->findOneBy([
@@ -85,8 +88,8 @@ class InscriptionController extends AbstractController
                         'status' => true,
                         'amount' => $montant,
                         'slug' => $verifPaiement->getSlug(),
-                        'apiKey' => '18714242495c8ba3f4cf6068.77597603',
-                        'siteId' => 422630
+                        'apiKey' => $config->getApikey(),
+                        'siteId' => $config->getSiteId()
                     ];
 
                     return $this->json($message);
@@ -131,8 +134,8 @@ class InscriptionController extends AbstractController
                     'status' => true,
                     'amount' => $montant,
                     'slug' => $paiement->getSlug(),
-                    'apiKey' => '18714242495c8ba3f4cf6068.77597603',
-                    'siteId' => 422630
+                    'apiKey' => $config->getApikey(),
+                    'siteId' => $config->getSiteId()
                 ];
 
                 return $this->json($message);
