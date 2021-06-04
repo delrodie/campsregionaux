@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Region;
 
 use App\Utilities\GestionRegion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Region;
 
 use App\Entity\Sygesca\Scout;
 use App\Form\SearchMatriculeType;

@@ -1,17 +1,83 @@
-{% extends 'abidjan/abidjan_layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Hello AbidjanController!{% endblock %}
+{% block title %}ASCCI :: YOPOUGON{% endblock %}
+
+{% block menu %}
+    {{ include('yopougon/menu_yopougon.html.twig') }}
+{% endblock %}
+{% block style %}
+    {{ include('style.html.twig',{'couleurRGB': config.rgb, 'couleurTheme': config.theme, 'bg':config.bg}) }}
+{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
 
-    <div class="example-wrapper">
-        <h1>Bienvenue à {{ region.nom }}! ✅</h1>
+    <section class="main-header bg-header">
+        <div class="home-bg-img">
+            <div class="container">
+                <div class="owl-carousel owl-theme main-slider">
+                    <div class="item">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12 d-md-none mb-5">
+                                <div class="banner-img-02">
+                                    <img src="{{ absolute_url(asset('/assets/ascci.png')) }}" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="content">
+                                    <h2 class="banner-title text-lg-left text-center text-white text-uppercase">
+                                        {{ activite.nom }}<br>{{ region.nom }}
+                                    </h2>
+                                    <p class="text-white text-lg-left text-center para-txt font-weight-medium f-16">
+                                        {{ activite.description|raw }}
+                                    </p>
+                                    <div class="mt-md-4 mb-4 text-lg-left text-center">
+                                        <a href="#participation" class="btn theme-btn text-white">Je participe</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-md-block">
+                                <div class="banner-img-02">
+                                    <img src="{{ absolute_url(asset('/assets/ascci.png')) }}" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        Entrez votre matricule : {{ include('home/_search_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <section class="section contactus-section" id="participation" style="margin-top: 120px;">
+        <div class="container">
+            <div class="wow fadeInUp" data-wow-duration="1.0s">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="title-section">
+                            <div class="subtitle-hr d-flex align-items-center">
+                                <h6 class="subtitle theme-color text-uppercase position-relative">Recherche</h6>
+                                <hr>
+                            </div>
+                            <h2 class="title text-md-left text-center f-40">Je participe au camp</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ include('home/_search_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="loader"></div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let spinner = $('#loader');
+        $('form').submit(function(e) {
+            spinner.show();
+        });
+    </script>
 {% endblock %}
