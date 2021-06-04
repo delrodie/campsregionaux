@@ -2,20 +2,17 @@
 
 namespace App\Controller\Region;
 
-use App\Entity\Sygesca\Scout;
-use App\Form\SearchMatriculeType;
 use App\Utilities\GestionRegion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/jambognan")
+ * @Route("/ngamonou")
  */
-class AbidjanController extends AbstractController
+class BassamController extends AbstractController
 {
-    const region = "ABIDJAN";
+    const region = "GRAND BASSAM";
 
     private $gestionRegion;
 
@@ -25,12 +22,12 @@ class AbidjanController extends AbstractController
     }
 
     /**
-     * @Route("/", name="abidjan_index", methods={"GET","POST"})
+     * @Route("/", name="bassam_index", methods={"GET","POST"})
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
         // Recuperation de la region
-        $region = $this->gestionRegion->getRegion(self::region);
+        $region = $this->gestionRegion->getRegion(self::region); //dd($region);
 
         if (!$region){
             $this->addFlash('danger', "Votre lien n'est pas fonctionnel. Veuillez contacter l'équipe nationale");
@@ -41,7 +38,7 @@ class AbidjanController extends AbstractController
 
 
 
-        return $this->render('abidjan/index.html.twig', [
+        return $this->render('bassam/index.html.twig', [
             'region' => $region,
         ]);
     }

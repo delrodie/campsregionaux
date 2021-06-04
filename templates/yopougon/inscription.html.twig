@@ -35,7 +35,7 @@
                         <h6 class="subtitle theme-color text-uppercase position-relative">Participation</h6>
                         <hr>
                     </div>
-                    <h2 class="title text-md-left text-center f-40">Je m'inscris au Jambognan 2021</h2>
+                    <h2 class="title text-md-left text-center f-40">Je m'inscris au {{ activite.nom }}</h2>
                 </div>
                 <form class="common-input-form mt-3"  action="{{ absolute_url(path('app_inscription')) }}" id="inscription" name="inscription" method="post">
                     <div class="row form-group">

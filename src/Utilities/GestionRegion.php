@@ -27,7 +27,7 @@ class GestionRegion
     public function getRegion($regionNom): Object
     {
         $region = $this->entityManager->getRepository(Region::class)->findOneBy(['nom' => $regionNom]);
-        return $region; dd($region);
+        return $region; //dd($region);
     }
 
     /**
@@ -78,7 +78,7 @@ class GestionRegion
                 $render = 'gagnoa/index.html.twig';
                 break;
             case 'GRAND BASSAM':
-                $render = 'bassm/index.html.twig';
+                $render = 'bassam/index.html.twig';
                 break;
             case 'KATIOLA':
                 $render = 'katiola/index.html.twig';
@@ -140,7 +140,7 @@ class GestionRegion
                 $render = 'gagnoa/inscription.html.twig';
                 break;
             case 'GRAND BASSAM':
-                $render = 'bassm/inscription.html.twig';
+                $render = 'bassam/inscription.html.twig';
                 break;
             case 'KATIOLA':
                 $render = 'katiola/inscription.html.twig';
