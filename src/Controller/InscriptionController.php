@@ -157,7 +157,8 @@ class InscriptionController extends AbstractController
     public function badge($idTransaction)
     {
         $paiement = $this->getDoctrine()->getRepository(Paiement::class)->findOneBy(['idTransaction' => $idTransaction]);
-        dd($paiement);
+        $message = "Felicitation ".$paiement->getNom().' '.$paiement->getPrenoms().", ton inscription a été effectuée avec succès. Merci de revenir plutard pour ton badge";
+        dd($message);
     }
 
 
