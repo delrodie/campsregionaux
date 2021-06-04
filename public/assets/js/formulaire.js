@@ -43,7 +43,7 @@ $().ready(function(){
                 CinetPay.setConfig({
                     apikey: response.apiKey,
                     site_id: response.siteId,
-                    notify_url: 'http://sicre.scoutascci.org/cinetpay/notify'
+                    notify_url: 'http://sicre.scoutascci.org/cinetpay/notify/' + response.siteId
                 });
                 CinetPay.setSignatureData({
                     amount: response.amount,

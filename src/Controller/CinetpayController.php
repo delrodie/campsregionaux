@@ -27,10 +27,10 @@ class CinetpayController extends AbstractController
 {
 
     /**
-     * @Route("/notify", name="cinetpay_notification", methods={"GET","POST"})
+     * @Route("/notify/{siteId}", name="cinetpay_notification", methods={"GET","POST"})
      */
-    public function notify(Request $request): Response
-    {
+    public function notify(Request $request, $siteId): Response
+    { //dd($siteId);
         //Initialisation
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
@@ -45,7 +45,7 @@ class CinetpayController extends AbstractController
 
                 $id_transaction = $cpmTransId;
                 $apiKey = '18714242495c8ba3f4cf6068.77597603';
-                $site_id = 422630;
+                $site_id = $siteId; //422630;
                 $plateform = "PROD"; // Valorisé à PROD si vous êtes en production
 
                 $CinetPay = new CinetPay($site_id, $apiKey, $plateform);
