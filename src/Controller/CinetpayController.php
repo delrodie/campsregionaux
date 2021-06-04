@@ -92,7 +92,7 @@ class CinetpayController extends AbstractController
                     }else{
                         // Recuperer les entities
                         $groupe = $this->getDoctrine()->getRepository(Groupe::class)->findOneBy(['id'=>$paiement->getGroupe()]);
-                        $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$paiement->getStatut()]);
+                        $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$paiement->getType()]);
                         $activitie = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['id'=>$paiement->getActivite()]);
 
                         // Ajout d'un nouveau participant
