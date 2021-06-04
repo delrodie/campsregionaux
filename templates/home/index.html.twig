@@ -4,17 +4,27 @@
 
 {% block body %}
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <div class="row">
+                    <div class="col-md-8">
+                        <img src="{{ absolute_url(asset('assets/carte.png')) }}" alt="" class="img-fluid" width="200%">
+                    </div>
+                    <div class="col-md-4 mt-5">
+                        <ul>
+                            <li>Abidjan <code><a href="{{ absolute_url(path('abidjan_index')) }}">Jambognan</a></code></li>
+                            <li>Yopougon <code><a href="{{ absolute_url(path('yopougon_index')) }}">Pow Wow</a></code></li>
+                            <li>Grand Bassam <code><a href="{{ absolute_url(path('bassam_index')) }}">N'GAmonou</a></code></li>
+                            <li>Backend <code><a href="{{ absolute_url(path('backend_activite_index')) }}">Activite</a></code></li>
+                            <li>Backend <code><a href="{{ absolute_url(path('backend_config_index')) }}">Config</a></code></li>
+                        </ul>
+                    </div>
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Abidjan <code><a href="{{ absolute_url(path('abidjan_index')) }}">Jambognan</a></code></li>
-        <li>Yopougon <code><a href="{{ absolute_url(path('yopougon_index')) }}">Pow Wow</a></code></li>
-        <li>Grand Bassam <code><a href="{{ absolute_url(path('bassam_index')) }}">N'GAmonou</a></code></li>
-        <li>Backend <code><a href="{{ absolute_url(path('backend_activite_index')) }}">Activite</a></code></li>
-        <li>Backend <code><a href="{{ absolute_url(path('backend_config_index')) }}">Config</a></code></li>
-    </ul>
-</div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
