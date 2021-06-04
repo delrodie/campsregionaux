@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,6 +38,10 @@ class ActiviteType extends AbstractType
             ->add('fin', TextType::class,[
                 'attr'=>['class' => 'form-control', 'placeholder'=>'Date fin', 'autocomplete'=>'off'],
                 'label' => 'Fin periode'
+            ])
+            ->add('description', TextareaType::class,[
+                'attr'=>['class' => 'form-control', 'rows'=>5],
+                'label' => "Description"
             ])
             ->add('logo')
             //->add('createdAt')

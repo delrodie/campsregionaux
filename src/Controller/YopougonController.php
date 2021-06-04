@@ -2,22 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Sygesca\Scout;
-use App\Form\SearchMatriculeType;
 use App\Utilities\GestionRegion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/jambognan")
+ * @Route("/powWow")
  */
-class AbidjanController extends AbstractController
+class YopougonController extends AbstractController
 {
-    const region = "ABIDJAN";
-    const couleurRGB = "75, 28, 163";
-    const couleurTheme = "#4B1CA3B2";
+    const region = "YOPOUGON";
 
     private $gestionRegion;
 
@@ -27,9 +22,9 @@ class AbidjanController extends AbstractController
     }
 
     /**
-     * @Route("/", name="abidjan_index", methods={"GET","POST"})
+     * @Route("/", name="yopougon_index", methods={"GET","POST"})
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
         // Recuperation de la region
         $region = $this->gestionRegion->getRegion(self::region);
@@ -43,10 +38,8 @@ class AbidjanController extends AbstractController
 
 
 
-        return $this->render('abidjan/index.html.twig', [
+        return $this->render('yopougon/index.html.twig', [
             'region' => $region,
-            'couleurRGB' => self::couleurRGB,
-            'couleurTheme' => self::couleurTheme
         ]);
     }
 }

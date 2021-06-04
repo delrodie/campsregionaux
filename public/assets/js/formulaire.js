@@ -1,6 +1,7 @@
 $().ready(function(){
     let districtId = $('#inscription_district').val()
     let url = $('#url').val()
+    let spinner = $('#loader')
 
     // Gestion des groupes
     $('#inscription_district').on('change', function () {
@@ -23,15 +24,19 @@ $().ready(function(){
     // Soumission
     $("#inscription").submit(function (event) {
         event.preventDefault();
+        spinner.show();
+
         var post_url = $(this).attr("action");
         var request_method = $(this).attr("method");
         var form_data = $(this).serialize();
+
         $.ajax({
             url: post_url,
             type: request_method,
             data: form_data,
             dataType: 'json',
         }).done(function (response) {
+            spinner.hide();
             if (response.status === true){
                 console.log(response.apiKey)
                 console.log(response.siteId)

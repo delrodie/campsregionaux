@@ -178,7 +178,8 @@ class InscriptionController extends AbstractController
             'scout' => $scout,
             'districts' => $this->getDoctrine()->getRepository(District::class)->findBy(['region'=>$region->getId()]),
             'activite' => $activite,
-            'montant' => $montant
+            'montant' => $montant,
+            'config' => $this->gestionRegion->getConfig($region->getId()),
         ]);
     }
 

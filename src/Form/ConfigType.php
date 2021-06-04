@@ -24,6 +24,18 @@ class ConfigType extends AbstractType
                 'attr' =>['class'=>"form-control", 'placeholder'=>"L'id du Site", "autocomplete"=>"off"],
                 'label'=>"Site ID"
             ])
+            ->add('couleurRGB', TextType::class,[
+                'attr' =>['class'=>"form-control", 'placeholder'=>"La couleur RGB", "autocomplete"=>"off"],
+                'label'=>"RGB"
+            ])
+            ->add('couleurTheme', TextType::class,[
+                'attr' =>['class'=>"form-control", 'placeholder'=>"La couleur theme", "autocomplete"=>"off"],
+                'label'=>"Theme"
+            ])
+            ->add('bg', TextType::class,[
+                'attr' =>['class'=>"form-control", 'placeholder'=>"L'image background", "autocomplete"=>"off"],
+                'label'=>"Image"
+            ])
             ->add('region', EntityType::class,[
                 'attr'=>['class' => 'form-control'],
                 'class' => Region::class,

@@ -33,6 +33,21 @@ class Config
      */
     private $region;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $couleurRGB;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $couleurTheme;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bg;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +85,42 @@ class Config
     public function setRegion(?Region $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    public function getCouleurRGB(): ?string
+    {
+        return $this->couleurRGB;
+    }
+
+    public function setCouleurRGB(?string $couleurRGB): self
+    {
+        $this->couleurRGB = $couleurRGB;
+
+        return $this;
+    }
+
+    public function getCouleurTheme(): ?string
+    {
+        return $this->couleurTheme;
+    }
+
+    public function setCouleurTheme(?string $couleurTheme): self
+    {
+        $this->couleurTheme = $couleurTheme;
+
+        return $this;
+    }
+
+    public function getBg(): ?string
+    {
+        return $this->bg;
+    }
+
+    public function setBg(?string $bg): self
+    {
+        $this->bg = $bg;
 
         return $this;
     }

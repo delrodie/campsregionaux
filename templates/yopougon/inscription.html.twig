@@ -1,0 +1,68 @@
+{% extends 'abidjan/abidjan_layout.html.twig' %}
+
+{% block title %}{{ parent()}} Inscription au camp{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    <div class="example-wrapper">
+        <h1>Inscription! ✅</h1>
+
+        <form action="{{ absolute_url(path('app_inscription')) }}" id="inscription" name="inscription" method="post">
+            <div class="form-group">
+
+                <label for="matricule">Matricule</label>
+                <input type="text" name="inscription_matricule" class="form-control" value="{{ scout.matricule }}" readonly>
+
+                <label for="carte">Carte</label>
+                <input type="text"  name="inscription_carte" class="form-control" value="{{ scout.carte }}" readonly>
+
+                <label for="nom">Nom</label>
+                <input type="text" name="inscription_nom" class="form-control" value="{{ scout.nom }}" readonly>
+
+                <label for="prenom">Prenom</label>
+                <input type="text" name="inscription_prenom" class="form-control" value="{{ scout.prenoms }}" readonly>
+
+                <label for="sexe">Sexe</label>
+                <input type="text" name="inscription_sexe" class="form-control" value="{{ scout.sexe }}" readonly>
+
+                <label for="date_naissance">Date de naissance</label>
+                <input type="text" name="inscription_date_naissance" class="form-control" value="{{ scout.dateNaiss }}" readonly>
+
+                <label for="lieu_naissance">Lieu de naissance</label>
+                <input type="text" name="inscription_lieu_naissance" class="form-control" value="{{ scout.lieuNaiss }}" readonly>
+
+                <label for="fonction">Fonction</label>
+                <input type="text" name="inscription_fonction" class="form-control" value="{{ scout.fonction }}" readonly>
+
+                <label for="inscription_district">Selectionnez le district du camp</label>
+                <select name="district" id="inscription_district" class="form-control" required>
+                    <option value="">--</option>
+                    {% for district in districts %}
+                        <option value="{{ district.id }}">{{ district.nom }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" id="url" value="{{ absolute_url(path("requete_ajax")) }}">
+
+                <label for="inscription_group">Selectionnez le groupe du camp</label>
+                <select name="inscription_groupe" id="inscription_groupe" class="form-control" required>
+                </select>
+
+                <input type="hidden" name="inscription_region" value="{{ region.slug }}">
+                <input type="hidden" name="inscription_scout" value="{{ scout.slug }}">
+                <input type="hidden" name="inscription_activite" value="{{ activite.id }}">
+
+                <div class="mt-3 mb-5">Participation: <strong><span style="font-size: 1.7rem; color: red">{{ montant|number_format(0,'','.') }}</span> FCFA</strong></div>
+
+                <button class="btn btn-primary">S'inscrire</button>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('assets/js/formulaire.js')) }}"></script>
+{% endblock %}

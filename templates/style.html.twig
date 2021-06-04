@@ -1,0 +1,98 @@
+<style>
+    .bg-header {
+        background-image: url({{ absolute_url(asset('/assets/fontend/images/region/bg/'~ bg)) }});
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100%;
+        background-position: center;
+        position: relative;
+    }
+    .bg-header::after, .about-parallex::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+        background-color: rgba({{ couleurRGB }}, 0.8);
+    }
+    .theme-btn{
+        width: 100%;
+        font-weight: 800;
+        font-size: 24px;
+    }
+    .contactus-section input.form-control {
+        height: 38px;
+    }
+    .btn {
+        height: 38px;
+        line-height: 35px;
+        text-align: center;
+        padding: 0 18px;
+        text-transform: uppercase;
+        transition: background-image .3s linear;
+        transition: box-shadow .3s linear;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 7px;
+        font-size: 12px !important;
+    }
+    .contact_btn .btn,
+    .theme-btn {
+        transition: all ease 1s;
+        background-image: linear-gradient(to right, transparent, transparent,{{ couleurTheme }}, {{ couleurTheme }});
+        background-size: 300%;
+        background-position: 0 0;
+    }
+    .contact-form-btn {
+        min-width: 140px;
+        background-image: linear-gradient(to right,{{ couleurTheme }}, {{ couleurTheme }}, #235FCD, #1C4CA3) !important;
+    }
+    .section.footer {
+        padding-top: 20px;
+        background-image: linear-gradient(to right, rgba({{ couleurRGB }}, 0.9), rgba({{ couleurRGB }}, 0.9));
+        background-position: 100% 0;
+        background-size: 300%;
+    }
+    .section.footer a{ color: white;
+        font-weight: bold;}
+    .section.footer a:hover{ color: darkorange;
+        font-weight: bold;}
+    @media (max-width: 900px) {
+        .footer::after {
+            height: 20px;
+        }
+    }
+    .breadcrumb-content {
+        min-height: 100px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .inner-header-bg::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+        background-color: rgba({{ couleurRGB }}, 0.9);
+    }
+    .bg-navbar{
+        background-color:rgba({{ couleurRGB }}, 0.9);"
+    }
+    #loader {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        background: rgba(255,255,255,0.75) url({{ absolute_url(asset('/assets/fontend/images/spinner.gif')) }}) no-repeat center center;
+        z-index: 10000;
+    }
+</style>
