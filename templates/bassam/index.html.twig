@@ -64,7 +64,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        {{ include('home/_search_form.html.twig') }}
+                        {% if civil == true %}
+                            {{ include('home/_search_civil_form.html.twig') }}
+                        {% else %}
+                            {{ include('home/_search_form.html.twig') }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
