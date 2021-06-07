@@ -14,7 +14,7 @@ class SearchMatriculeType extends AbstractType
     {
         $builder
             ->add('matricule', SearchType::class,[
-                'attr'=>['class' => 'form-control', 'placeholder'=>'Entrez votre matricule', 'autocomplete'=>"off", 'aria-describedby'=>'button-addon2'],
+                'attr'=>['class' => 'form-control', 'placeholder'=>'Votre matricule', 'autocomplete'=>"off", 'aria-describedby'=>'button-addon2'],
                 'required'=>true,
                 'label'=>'Recherche'
             ])
