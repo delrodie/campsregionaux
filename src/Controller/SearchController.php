@@ -86,7 +86,8 @@ class SearchController extends AbstractController
                 'nom' => $nom,
                 'prenoms' => $prenom,
                 'datenaiss' => $dateNaiss,
-                'lieunaiss' => $lieuNaiss
+                'lieunaiss' => $lieuNaiss,
+                'cotisation' => '2020-2021'
             ]);
 
             // Si le scout existe alors renvoyer a abidjan_inscription
