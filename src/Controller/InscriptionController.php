@@ -156,9 +156,37 @@ class InscriptionController extends AbstractController
      */
     public function badge($idTransaction)
     {
-        $paiement = $this->getDoctrine()->getRepository(Paiement::class)->findOneBy(['idTransaction' => $idTransaction]);
-        $message = "Felicitation ".$paiement->getNom().' '.$paiement->getPrenoms().", ton inscription a été effectuée avec succès. Merci de revenir plutard pour ton badge";
-        dd($message);
+        $paiement = $this->getDoctrine()->getRepository(Paiement::class)->findOneBy([
+            'idTransaction' => $idTransaction,
+
+        ]);
+        $participation = $this->getDoctrine()->getRepository(Participant::class)->getBadge($paiement->getMatricule());
+        //$config = $this->getDoctrine()->getRepository(Config::class)->findOneBy(['region'=>])
+        //dd($participation);
+        $scout = [
+            'activite' => $participation->getActivite()->getNom(),
+            'identite' => $participation->getNom().' '.$participation->getPrenom(),
+            'fonction' => $participation->getFonction(),
+            'matricule' => $participation->getMatricule(),
+            'carte' => $participation->getCarte(),
+            'sexe' => $participation->getSexe(),
+            'district' => $participation->getGroupe()->getDistrict()->getNom(),
+            'groupe' => $participation->getGroupe()->getParoisse(),
+            'urgence' => $participation->getContacturgence(),
+            'parent' => $participation->geturgence(),
+            'region' => $participation->getActivite()->getRegion()->getNom(),
+            'region_id' => $participation->getActivite()->getRegion()->getId()
+        ];
+
+        $config = $this->getDoctrine()->getRepository(Config::class)->findOneBy(['region'=>$scout['region_id']]);
+
+        //dd($config);
+        //$message = "Felicitation ".$paiement->getNom().' '.$paiement->getPrenoms().", ton inscription a été effectuée avec succès. Merci de revenir plutard pour ton badge";
+        //dd($message);
+        return $this->render('home/badge.html.twig',[
+            'scout' => $scout,
+            'config' => $config
+        ]);
     }
 
 

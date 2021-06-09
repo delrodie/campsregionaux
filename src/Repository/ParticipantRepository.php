@@ -19,6 +19,23 @@ class ParticipantRepository extends ServiceEntityRepository
         parent::__construct($registry, Participant::class);
     }
 
+    public function getBadge($matricule)
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('a')
+            ->addSelect('r')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->leftJoin('p.activite', 'a')
+            ->leftJoin('a.region', 'r')
+            ->leftJoin('p.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->where('p.matricule = :matricule')
+            ->setParameter('matricule', $matricule)
+            ->getQuery()->getOneOrNullResult()
+            ;
+    }
+
     // /**
     //  * @return Participant[] Returns an array of Participant objects
     //  */
