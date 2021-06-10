@@ -6,6 +6,7 @@ namespace App\Utilities;
 
 use App\Entity\Activite;
 use App\Entity\Config;
+use App\Entity\Participant;
 use App\Entity\Sygesca\Region;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -45,6 +46,38 @@ class GestionRegion
             'theme' => $config->getCouleurTheme(),
             'bg' => $config->getBg(),
         ];
+    }
+
+    public function badge($matricule)
+    {
+        $participation = $this->entityManager->getRepository(Participant::class)->getBadge($matricule);
+
+        if($participation){
+            $config = $this->entityManager->getRepository(Config::class)->findOneBy(['region'=>$participation->getActivite()->getRegion()->getId()]);
+
+            $scout = [
+                'activite' => $participation->getActivite()->getNom(),
+                'identite' => $participation->getNom().' '.$participation->getPrenom(),
+                'fonction' => $participation->getFonction(),
+                'matricule' => $participation->getMatricule(),
+                'carte' => $participation->getCarte(),
+                'sexe' => $participation->getSexe(),
+                'district' => $participation->getGroupe()->getDistrict()->getNom(),
+                'groupe' => $participation->getGroupe()->getParoisse(),
+                'urgence' => $participation->getContacturgence(),
+                'parent' => $participation->geturgence(),
+                'region' => $participation->getActivite()->getRegion()->getNom(),
+                'region_id' => $participation->getActivite()->getRegion()->getId(),
+                'config_couleurTheme' => $config->getCouleurTheme(),
+                'config_couleurRGB' => $config->getCouleurRGB(),
+                'config_bg' => $config->getBg()
+            ];
+        }else{
+            $scout = [];
+        }
+
+        return $scout;
+
     }
 
     /**
@@ -165,6 +198,68 @@ class GestionRegion
                 break;
             default:
                 $render = 'home/index.html.twig';
+                break;
+        }
+
+        return $render;
+    }
+
+    /**
+     * Le template de badge
+     *
+     * @param $region
+     * @return string
+     */
+    public function renderBadge($region)
+    {
+        switch ($region){
+            case 'ABENGOUROU':
+                $render = 'abengourou/search_badge.html.twig';
+                break;
+            case 'ABIDJAN':
+                $render = 'abidjan/search_badge.html.twig';
+                break;
+            case 'AGBOVILLE':
+                $render = 'agboville/search_badge.html.twig';
+                break;
+            case 'BONDOUKOU':
+                $render = 'bondoukou/search_badge.html.twig';
+                break;
+            case 'BOUAKE':
+                $render = 'bouake/search_badge.html.twig';
+                break;
+            case 'DALOA':
+                $render = 'daloa/search_badge.html.twig';
+                break;
+            case 'GAGNOA':
+                $render = 'gagnoa/search_badge.html.twig';
+                break;
+            case 'GRAND BASSAM':
+                $render = 'bassam/search_badge.html.twig';
+                break;
+            case 'KATIOLA':
+                $render = 'katiola/search_badge.html.twig';
+                break;
+            case 'KORHOGO':
+                $render = 'korhogo/search_badge.html.twig';
+                break;
+            case 'MAN':
+                $render = 'man/search_badge.html.twig';
+                break;
+            case 'ODIENNE':
+                $render = 'odienne/search_badge.html.twig';
+                break;
+            case 'SAN PEDRO':
+                $render = 'sanpedro/search_badge.html.twig';
+                break;
+            case 'YAMOUSSOUKRO':
+                $render = 'yako/search_badge.html.twig';
+                break;
+            case 'YOPOUGON':
+                $render = 'yopougon/search_badge.html.twig';
+                break;
+            default:
+                $render = 'badge/index.html.twig';
                 break;
         }
 

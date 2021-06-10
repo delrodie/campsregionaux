@@ -22,7 +22,7 @@
                 border-radius: 10px;
             }
             .impression .camp{
-                background-color: {{ config.couleurTheme }};
+                background-color: {{ scout.config_couleurTheme }};
                 color: white;
                 border-radius: 10px 10px 0 0;
             }
@@ -40,7 +40,7 @@
             }
             .fonction{
                 font-weight: bold;
-                color: {{ config.couleurTheme }};
+                color: {{ scout.config_couleurTheme }};
             }
             .libelle{
                 font-size: 0.9rem;
@@ -116,7 +116,7 @@
                 margin-left: 25px;
             }
             .impression .camp{
-                background-color: {{ config.couleurTheme }};
+                background-color: {{ scout.config_couleurTheme }};
                 -webkit-print-color-adjust: exact;
                 color: white;
                 border-radius: 10px 10px 0 0;
@@ -137,7 +137,7 @@
             }
             .fonction{
                 font-weight: bold;
-                color: {{ config.couleurTheme }};
+                color: {{ scout.config_couleurTheme }};
                 overflow: hidden;
                 padding-top: 0;
                 text-align: center;
@@ -215,6 +215,7 @@
     <div class="row">
         <div class="col-12 text-center mb-3 mt-1">
             <a href="#" onclick="imprimer('impressionCarte')" class="btn btn-primary">Imprimer</a>
+            <a href="javascript:history.go(-1)" class="btn btn-outline-danger">Retour</a>
         </div>
     </div>
 

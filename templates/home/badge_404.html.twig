@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    <section class="section">
+        <div class="container">
+            <img src="{{ absolute_url(asset('/assets/ascci.png')) }}" class="img-fluid d-block mx-auto" alt="">
+            <h2 class="title text-center font-weight-bold mt-4">Oups!! Votre badge n'est pas encore disponible</h2>
+
+            <div class="d-flex justify-content-center mt-lg-5 mt-4">
+                <a href="javascript:history.go(-1)" class="btn theme-dark-btn text-white">Retour</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+    404 Erreur d'édition de badge
+{% endblock %}
+

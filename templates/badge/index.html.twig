@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Impression du badge{% endblock %}
+
+{% block body %}
+    {% if civil == true %}
+        {{ include('home/_search_civil_form.html.twig') }}
+    {% else %}
+        {{ include('home/_search_badge_by_matricule_form.html.twig') }}
+    {% endif %}
+{% endblock %}

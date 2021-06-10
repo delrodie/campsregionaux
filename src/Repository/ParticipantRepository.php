@@ -19,6 +19,11 @@ class ParticipantRepository extends ServiceEntityRepository
         parent::__construct($registry, Participant::class);
     }
 
+    /**
+     * @param $matricule
+     * @return int|mixed|string|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getBadge($matricule)
     {
         return $this->createQueryBuilder('p')
