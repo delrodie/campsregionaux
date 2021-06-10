@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent()}} Inscription au camp{% endblock %}
+
+{% block menu %}
+    {{ include('yopougon/menu_yopougon.html.twig') }}
+{% endblock %}
+{% block style %}
+    {{ include('style.html.twig',{'couleurRGB': config.rgb, 'couleurTheme': config.theme, 'bg': config.bg}) }}
+{% endblock %}
+
+{% block body %}
+    <section class="inner-header-bg">
+        <div class="container">
+            <!-- Breadcrumb Start-->
+            <div class="section-breadcrumb">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 justify-content-center align-self-center pb-2">
+                            <div class="breadcrumb-content">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Breadcrumb End -->
+        </div>
+    </section>
+    {% if civil == true %}
+        {{ include('home/_search_badge_by_civil_form.html.twig') }}
+    {% else %}
+        {{ include('home/_search_badge_by_matricule_form.html.twig') }}
+    {% endif %}
+    <div id="loader"></div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .contactus-section input.form-control {
+            height: 38px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: darkblue;
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let spinner = $('#loader');
+        $('form').submit(function(e) {
+            spinner.show();
+        });
+    </script>
+{% endblock %}
