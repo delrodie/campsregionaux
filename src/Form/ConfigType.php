@@ -36,6 +36,10 @@ class ConfigType extends AbstractType
                 'attr' =>['class'=>"form-control", 'placeholder'=>"L'image background", "autocomplete"=>"off"],
                 'label'=>"Image"
             ])
+            ->add('logoRegion', TextType::class,[
+                'attr' =>['class'=>"form-control", 'placeholder'=>"Le logo de la region", "autocomplete"=>"off"],
+                'label'=>"Logo"
+            ])
             ->add('region', EntityType::class,[
                 'attr'=>['class' => 'form-control'],
                 'class' => Region::class,
