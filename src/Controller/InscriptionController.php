@@ -80,6 +80,7 @@ class InscriptionController extends AbstractController
                     $verifPaiement->setMontant($montant);
                     $verifPaiement->setActivite($activite);
                     $verifPaiement->setGroupe($groupe);
+                    $verifPaiement->setIdTransaction($id_transaction);
 
                     $em->flush();
 

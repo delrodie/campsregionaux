@@ -38,7 +38,7 @@ class CinetpayController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $cpmTransId = $request->get('cpm_trans_id');
+        $cpmTransId = $request->get('cpm_trans_id'); //dd($siteId);
          if (isset($cpmTransId)){
             try {
                 // Initialisation de CinetPay et identification de paiement
