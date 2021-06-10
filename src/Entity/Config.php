@@ -48,6 +48,11 @@ class Config
      */
     private $bg;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $logoRegion;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +126,18 @@ class Config
     public function setBg(?string $bg): self
     {
         $this->bg = $bg;
+
+        return $this;
+    }
+
+    public function getLogoRegion(): ?string
+    {
+        return $this->logoRegion;
+    }
+
+    public function setLogoRegion(?string $logoRegion): self
+    {
+        $this->logoRegion = $logoRegion;
 
         return $this;
     }

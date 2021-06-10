@@ -70,7 +70,8 @@ class GestionRegion
                 'region_id' => $participation->getActivite()->getRegion()->getId(),
                 'config_couleurTheme' => $config->getCouleurTheme(),
                 'config_couleurRGB' => $config->getCouleurRGB(),
-                'config_bg' => $config->getBg()
+                'config_bg' => $config->getBg(),
+                'config_logo' => $config->getLogoRegion()
             ];
         }else{
             $scout = [];
