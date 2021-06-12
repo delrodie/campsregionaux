@@ -23,6 +23,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * @return int|mixed|string
+     */
+    public function findListWithoutDelrodie()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.username <> :delrodie')
+            ->orderBy('u.username', 'ASC')
+            ->setParameter('delrodie', 'delrodie')
+            ->getQuery()->getResult();
+
+    }
+
+    public function liste()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.username <> :role')
+            ->setParameters([
+                'role' => 'delrodie',
+            ])
+            ;
+    }
+
+    /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void

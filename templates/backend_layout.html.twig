@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>ASCCI :: SICRE</title>
+    <title>ASCCI ::{% block title %}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <link rel="shortcut icon" href="{{ absolute_url(asset('/backoffice/images/ascci.png')) }}">
@@ -173,17 +173,21 @@
                         </ul>
                     </li>
 
-                    <li class="has-submenu">
-                        <a href="#"><i class="mdi mdi-lock"></i>Sécurité</a>
-                        <ul class="submenu megamenu">
-                            <li>
-                                <ul>
-                                    <li><a href="#">Utilisateurs</a></li>
-                                    <li><a href="#">Gestionnaires</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                        <li class="has-submenu">
+                            <a href="#"><i class="mdi mdi-lock"></i>Sécurité</a>
+                            <ul class="submenu megamenu">
+                                <li>
+                                    <ul>
+                                        <li><a href="{{ path('admin_user_index') }}">Utilisateurs</a></li>
+                                        <li><a href="#">Gestionnaires</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    {% endif %}
 
                 </ul>
             </div>
