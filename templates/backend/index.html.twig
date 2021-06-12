@@ -1,0 +1,211 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }}Hello BackendController!{% endblock %}
+
+{% block body %}
+    <div class="wrapper dashborad-h">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Tableau de bord</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-xl-3">
+                    <div class="card bg-warning m-b-30">
+                        <div class="card-body">
+                            <div class="d-flex row">
+                                <div class="col-3 align-self-center">
+                                    <div class="round">
+                                        <i class="mdi mdi-account-multiple-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8 ml-auto align-self-center text-center">
+                                    <div class="m-l-10 text-white float-right">
+                                        <h5 class="mt-0 round-inner">18090</h5>
+                                        <p class="mb-0 ">Louveteaux</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card bg-success m-b-30">
+                        <div class="card-body">
+                            <div class="d-flex row">
+                                <div class="col-3 align-self-center">
+                                    <div class="round">
+                                        <i class="mdi mdi-account-multiple-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8 text-center ml-auto align-self-center">
+                                    <div class="m-l-10 text-white float-right">
+                                        <h5 class="mt-0 round-inner">562</h5>
+                                        <p class="mb-0 ">Eclaireurs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card bg-warning m-b-30">
+                        <div class="card-body">
+                            <div class="d-flex row">
+                                <div class="col-3 align-self-center">
+                                    <div class="round ">
+                                        <i class="mdi mdi-account-multiple-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8 ml-auto align-self-center text-center">
+                                    <div class="m-l-10 text-white float-right">
+                                        <h5 class="mt-0 round-inner">7514</h5>
+                                        <p class="mb-0 ">Cheminots</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card bg-danger m-b-30">
+                        <div class="card-body">
+                            <div class="d-flex row">
+                                <div class="col-3 align-self-center">
+                                    <div class="round">
+                                        <i class="mdi mdi-account-multiple-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8 ml-auto align-self-center text-center">
+                                    <div class="m-l-10 text-white float-right">
+                                        <h5 class="mt-0 round-inner">123</h5>
+                                        <p class="mb-0">Routiers</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-xl-8">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <h5 class="header-title mb-3 mt-0">Order List</h5>
+                            <canvas id="myChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-4">
+                    <div class="card m-b-30">
+                        <div class="card-body new-user">
+                            <h5 class="header-title mb-3 mt-0">Derniers inscrits</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="border-top-0">#</th>
+                                        <th class="border-top-0">Identité</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-circle" src="assets/images/avatar.png" alt="user" width="40"> </td>
+                                        <td>
+                                            <a href="javascript:void(0);">AMOIKON Kanga Dieudonné</a> <br>
+                                            <span style="font-style:italic;">Assistant Commissaire National (ACN)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-circle" src="assets/images/avatar.png" alt="user" width="40"> </td>
+                                        <td>
+                                            <a href="javascript:void(0);">AMOIKON Kanga Dieudonné</a> <br>
+                                            <span style="font-style:italic;">Assistant Commissaire National (ACN)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-circle" src="assets/images/avatar.png" alt="user" width="40"> </td>
+                                        <td>
+                                            <a href="javascript:void(0);">AMOIKON Kanga Dieudonné</a> <br>
+                                            <span style="font-style:italic;">Assistant Commissaire National (ACN)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-circle" src="assets/images/avatar.png" alt="user" width="40"> </td>
+                                        <td>
+                                            <a href="javascript:void(0);">AMOIKON Kanga Dieudonné</a> <br>
+                                            <span style="font-style:italic;">Assistant Commissaire National (ACN)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-circle" src="assets/images/avatar.png" alt="user" width="40"> </td>
+                                        <td>
+                                            <a href="javascript:void(0);">AMOIKON Kanga Dieudonné</a> <br>
+                                            <span style="font-style:italic;">Assistant Commissaire National (ACN)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img class="rounded-circle" src="assets/images/avatar.png" alt="user" width="40"> </td>
+                                        <td>
+                                            <a href="javascript:void(0);">AMOIKON Kanga Dieudonné</a> <br>
+                                            <span style="font-style:italic;">Assistant Commissaire National (ACN)</span>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Abidjan Plateau', 'Abidjan Palmeraie', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
