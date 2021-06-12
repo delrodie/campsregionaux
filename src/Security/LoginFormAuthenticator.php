@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -31,14 +32,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $csrfTokenManager;
     private $passwordEncoder;
     private $security;
+    private $session;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, \App\Utilities\Security $security)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, \App\Utilities\Security $security, SessionInterface $session)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->security = $security;
+        $this->session = $session;
     }
 
     public function supports(Request $request)
@@ -95,6 +98,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         // Mise a jour du nombre de connexion et de la date de la dernière connexion
         $this->security->connexion();
+
+        // Mise en session du token de modification du mot de passe
+        $tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz1234567890";
+        $tokenSession = null; $res=null;
+        for ($i=0; $i<25; $i++){
+            $res = $tab[rand(0,60)];
+            $tokenSession = $tokenSession.''.$res;
+        }
+
+        $this->session->set('updatePassword', $tokenSession);
 
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {

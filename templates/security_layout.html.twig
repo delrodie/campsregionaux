@@ -41,12 +41,8 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <div class="text-center pt-3">
-                                    <a href="{{ absolute_url(path('backend_dashboard') )}}"> CONNEXION</a>
-                                </div>
-                                <div class="px-3 pb-3">
-                                    {% block body %}{% endblock %}
-                                </div>
+                                {% block body %}{% endblock %}
+
 
                             </div>
                         </div>
