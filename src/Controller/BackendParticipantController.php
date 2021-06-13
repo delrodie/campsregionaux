@@ -33,6 +33,12 @@ class BackendParticipantController extends AbstractController
      */
     public function index(ParticipantRepository $participantRepository): Response
     {
+        $regionSession = $this->session->get('region');
+        if (!$regionSession){
+            return $this->render('backend_participant/liste_admin.html.twig',[
+                'listes' => $this->utility->listeParticipants()
+            ]);
+        }
 
         return $this->render('backend_participant/index.html.twig', [
             'listes' => $this->utility->listeParticipants(),
