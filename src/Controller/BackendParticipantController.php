@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Repository\ParticipantRepository;
+use App\Utilities\GestionRegion;
 use App\Utilities\Utility;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,11 +22,13 @@ class BackendParticipantController extends AbstractController
 {
     private $session;
     private $utility;
+    private $gestionRegion;
 
-    public function __construct(SessionInterface $session, Utility $utility)
+    public function __construct(SessionInterface $session, Utility $utility, GestionRegion $gestionRegion)
     {
         $this->session = $session;
         $this->utility = $utility;
+        $this->gestionRegion = $gestionRegion;
     }
 
     /**
@@ -43,6 +46,23 @@ class BackendParticipantController extends AbstractController
         return $this->render('backend_participant/index.html.twig', [
             'listes' => $this->utility->listeParticipants(),
         ]);
+    }
+
+    /**
+     * @Route("/{matricule}", name="backend_participant_show", methods={"GET"})
+     */
+    public function show($matricule)
+    {
+        $scout = $this->gestionRegion->badge($matricule);
+
+        if ($scout){
+            return $this->render('home/badge.html.twig',[
+                'scout' => $scout,
+            ]);
+        }else{
+            return $this->render('home/badge_404.html.twig');
+        }
+
     }
     
 
