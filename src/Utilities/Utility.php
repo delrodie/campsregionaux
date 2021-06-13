@@ -4,8 +4,10 @@
 namespace App\Utilities;
 
 
+use App\Entity\Paiement;
 use App\Entity\Participant;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Utility
@@ -42,5 +44,58 @@ class Utility
         }
 
         return $listes;
+    }
+
+    public function listeNouveauxParticipant($annee, $semaine)
+    {
+        $periode = $this->week2str($annee, $semaine);
+        $participants = $this->entityManager->getRepository(Paiement::class)
+            ->findPeriodeParticipant(
+                $this->session->get('region'),
+                $periode['debut'],
+                $periode['fin']
+            );
+
+        $listes=[]; $i=0;
+        foreach ($participants as $participant){
+            $listes[$i++]=[
+                'matricule' => $participant->getMatricule(),
+                'carte' => $participant->getCarte(),
+                'nom' => $participant->getNom(),
+                'prenom' => $participant->getPrenoms(),
+                'sexe' => $participant->getSexe(),
+                'fonction' => $participant->getFonction(),
+                'montant' => $participant->getActivite()->getMontant(),
+                'slug' => $participant->getSlug(),
+                'groupe' => $participant->getGroupe()->getParoisse(),
+                'district' => $participant->getGroupe()->getDistrict()->getNom(),
+                'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'statut' => $participant->getStatut()
+            ];
+        }
+
+        return $listes;
+    }
+
+    /**
+     * Retourne une semaine sous forme de chaine "du {lundi} au {dimanche}..." en gérant des cas particuliers :
+     *  - début et fin pas dans le même mois
+     *  - début et fin pas dans la même année
+     * !!! Penser à utiliser setlocale pour avoir la date (jour et mois) en Français !!!
+     */
+    function week2str($annee, $no_semaine){
+        // Récup jour début et fin de la semaine
+        $timeStart = strtotime("First Monday January {$annee} + ".($no_semaine - 1)." Week");
+        $timeEnd   = strtotime("First Monday January {$annee} + {$no_semaine} Week -1 day");
+
+
+        $dateDebut = strftime("%Y-%m-%d 00:00:00", $timeStart);
+        $dateFin = strftime("%Y-%m-%d 23:59:59", $timeEnd);
+
+        $periode = [
+            'debut' => $dateDebut,
+            'fin' => $dateFin
+        ];
+        return $periode;
     }
 }

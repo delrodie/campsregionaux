@@ -19,6 +19,48 @@ class PaiementRepository extends ServiceEntityRepository
         parent::__construct($registry, Paiement::class);
     }
 
+    public function findPeriodeParticipant($region=null, $debut, $fin)
+    {
+        $query = $this->getList();
+        if ($region){
+            $query->where('r.id = :region')
+                ->andWhere('p.createdAt BETWEEN :debut AND :fin')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenoms', 'ASC')
+                ->setParameters([
+                    'region' => $region,
+                    'debut' => $debut,
+                    'fin' => $fin
+                ])
+            ;
+        }else{
+            $query
+                ->where('p.createdAt BETWEEN :debut AND :fin')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenoms', 'ASC')
+                ->setParameters([
+                    'debut' => $debut,
+                    'fin' => $fin
+                ])
+            ;
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function getList()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('a')
+            ->addSelect('r')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->leftJoin('p.activite', 'a')
+            ->leftJoin('a.region', 'r')
+            ->leftJoin('p.groupe', 'g')
+            ->leftJoin('g.district', 'd');
+    }
+
     // /**
     //  * @return Paiement[] Returns an array of Paiement objects
     //  */

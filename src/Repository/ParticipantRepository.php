@@ -59,6 +59,7 @@ class ParticipantRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+
     public function getList()
     {
         return $this->createQueryBuilder('p')
