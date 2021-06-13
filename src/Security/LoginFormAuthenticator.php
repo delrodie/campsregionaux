@@ -109,6 +109,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         $this->session->set('updatePassword', $tokenSession);
 
+        // Mise en session de la region
+        if ($this->security->gestionnaire())
+            $this->session->set('region', $this->security->gestionnaire());
+
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);

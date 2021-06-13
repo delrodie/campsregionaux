@@ -41,6 +41,37 @@ class ParticipantRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findList($region=null)
+    {
+        $query = $this->getList();
+        if ($region){
+            $query->where('r.id = :region')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenom', 'ASC')
+                ->setParameter('region', $region)
+                ;
+        }else{
+            $query->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenom', 'ASC')
+                ;
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function getList()
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('a')
+            ->addSelect('r')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->leftJoin('p.activite', 'a')
+            ->leftJoin('a.region', 'r')
+            ->leftJoin('p.groupe', 'g')
+            ->leftJoin('g.district', 'd');
+    }
+
     // /**
     //  * @return Participant[] Returns an array of Participant objects
     //  */

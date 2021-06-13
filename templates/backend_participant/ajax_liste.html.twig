@@ -1,0 +1,15 @@
+{
+    "data": [
+    {% for liste in listes %}
+        {
+          "loop": "{{ loop.index}}",
+          "district": "{{ liste.district }}",
+          "groupe": "{{ liste.groupe }}",
+          "matricule": "{{ liste.matricule }}",
+          "carte": "{{ liste.carte }}",
+          "nom": "{{ liste.nom }}",
+          "fonction": "{{ liste.fonction }}"
+        },
+    {% endfor %}
+    ]
+}

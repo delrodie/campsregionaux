@@ -2,6 +2,7 @@
 
 namespace App\Utilities;
 
+use App\Entity\Gestionnaire;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,6 +42,11 @@ class Security
         return true;
     }
 
+    /**
+     * Mise a jour de la table User
+     *
+     * @return bool
+     */
     public function connexion()
     {
         //$user = $this->security->getUser();
@@ -54,5 +60,21 @@ class Security
         $this->entityManager->flush();
 
         return true;
+    }
+
+    public function gestionnaire()
+    {
+        $user = $this->security->getUser();
+        if ($user->getRoles()[0] === "ROLE_USER") {
+            $region = $this->entityManager->getRepository(Gestionnaire::class)
+                ->findOneBy(['user' => $user->getId()])
+                ->getRegion()->getId();
+            ;
+        }else{
+            $region = null;
+        }
+
+        return $region;
+
     }
 }

@@ -276,6 +276,7 @@ class GestionRegion
 
     }
 
+
     /**
      * Fonction pour arrondir au supérieur
      *
