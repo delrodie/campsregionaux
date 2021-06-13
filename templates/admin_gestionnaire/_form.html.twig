@@ -1,0 +1,17 @@
+<div class="general-label">
+    {{ form_start(form) }}
+        <div class="row form-group">
+            <div class="col-12 mb-3">{{ form_widget(form.region) }}</div>
+            <div class="col-12 mb-3 mt-3">{{ form_widget(form.user) }}</div>
+            <div class="col-12 mb-3 mt-3">{{ form_widget(form.nom) }}</div>
+            <div class="col-12 mb-3 mt-3">{{ form_widget(form.prenom) }}</div>
+            <div class="col-12 mb-3 mt-3">{{ form_widget(form.tel) }}</div>
+        </div>
+        {{ form_widget(form) }}
+    <div class="text-right mt-5">
+        <a href="{{ path('admin_gestionnaire_index') }}" class="btn btn-outline-secondary btn-raised mb-0">Annuler</a>
+        <button class="btn btn-primary btn-raised mb-0">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+

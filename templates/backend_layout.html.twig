@@ -97,7 +97,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <div class="dropdown-item noti-title">
-                                    <h5>Delrodie</h5>
+                                    <h5>{{ app.user.username }}</h5>
                                 </div>
                                 <a class="dropdown-item" href="{{ path('app_change_password') }}"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Mot de passe</a>
                                 <div class="dropdown-divider"></div>
@@ -149,31 +149,33 @@
                         </ul>
                     </li>
 
-                    <li class="has-submenu">
-                        <a href="#"><i class="mdi mdi-traffic-light"></i>Opérations</a>
-                        <ul class="submenu megamenu">
-                            <li>
-                                <ul>
-                                    <li><a href="#">Validés</a></li>
-                                    <li><a href="#">Non validés</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                    {% if is_granted('ROLE_DEV') %}
+                        <li class="has-submenu">
+                            <a href="#"><i class="mdi mdi-traffic-light"></i>Opérations</a>
+                            <ul class="submenu megamenu">
+                                <li>
+                                    <ul>
+                                        <li><a href="#">Validés</a></li>
+                                        <li><a href="#">Non validés</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
 
-                    <li class="has-submenu">
-                        <a href="#"><i class="mdi mdi-settings"></i>Paramètres</a>
-                        <ul class="submenu megamenu">
-                            <li>
-                                <ul>
-                                    <li><a href="#">Activités</a></li>
-                                    <li><a href="#">Config</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
 
                     {% if is_granted('ROLE_ADMIN') %}
+                        <li class="has-submenu">
+                            <a href="#"><i class="mdi mdi-settings"></i>Paramètres</a>
+                            <ul class="submenu megamenu">
+                                <li>
+                                    <ul>
+                                        <li><a href="#">Activités</a></li>
+                                        <li><a href="#">Config</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="has-submenu">
                             <a href="#"><i class="mdi mdi-lock"></i>Sécurité</a>
@@ -181,7 +183,7 @@
                                 <li>
                                     <ul>
                                         <li><a href="{{ path('admin_user_index') }}">Utilisateurs</a></li>
-                                        <li><a href="#">Gestionnaires</a></li>
+                                        <li><a href="{{ path('admin_gestionnaire_index') }}">Gestionnaires</a></li>
                                     </ul>
                                 </li>
                             </ul>
