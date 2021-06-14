@@ -45,7 +45,7 @@
                                             <td class="text-center">{{ liste.paieTelephone ? liste.paieTelephone : '-' }}</td>
                                             <td class="text-center">
                                                 {% if liste.statusPaiement != 'VALID' %}
-                                                    <a href="http://sicre.scoutascci.org/cinetpay/notify/{{ liste.idTransaction }}?cpm_trans_id={{ liste.idTransaction }}">{{ liste.idTransaction }}</a>
+                                                    <a href="{{ path('backend_paiement_show', {'idTransaction': liste.idTransaction, 'region': liste.region, 'regionId': liste.regionId}) }}" target="_blank">{{ liste.idTransaction }}</a>
                                                 {% else %}
                                                     {{ liste.idTransaction }}
                                                 {% endif %}

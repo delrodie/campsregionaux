@@ -47,6 +47,13 @@ class Utility
         return $listes;
     }
 
+    /**
+     * Liste des nouveaux paiements
+     * 
+     * @param $annee
+     * @param $semaine
+     * @return array
+     */
     public function listeNouveauxParticipant($annee, $semaine)
     {
         $periode = $this->week2str($annee, $semaine);
@@ -72,6 +79,44 @@ class Utility
                 'groupe' => $participant->getGroupe()->getParoisse(),
                 'district' => $participant->getGroupe()->getDistrict()->getNom(),
                 'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'regionId' => $participant->getGroupe()->getDistrict()->getRegion()->getId(),
+                'statut' => $participant->getStatut(),
+                'idTransaction' => $participant->getIdTransaction(),
+                'statusPaiement' => $participant->getStatusPaiement(),
+                'created' => $participant->getCreatedAt(),
+                'paieTelephone' => $participant->getPaieTelephone(),
+                //'config_siteId' => $config->getSiteId(),
+            ];
+        }
+
+        return $listes;
+    }
+
+
+    public function listPaiement($statut)
+    {
+        $participants = $this->entityManager->getRepository(Paiement::class)
+            ->findList(
+                $this->session->get('region'),
+                $statut
+            );
+
+        $listes=[]; $i=0;
+        foreach ($participants as $participant){
+            //$config = $this->entityManager->getRepository(Config::class)->findByRegion($participant->getGroupe()->getDistrict()->getRegion()->getId());
+            $listes[$i++]=[
+                'matricule' => $participant->getMatricule(),
+                'carte' => $participant->getCarte(),
+                'nom' => $participant->getNom(),
+                'prenom' => $participant->getPrenoms(),
+                'sexe' => $participant->getSexe(),
+                'fonction' => $participant->getFonction(),
+                'montant' => $participant->getActivite()->getMontant(),
+                'slug' => $participant->getSlug(),
+                'groupe' => $participant->getGroupe()->getParoisse(),
+                'district' => $participant->getGroupe()->getDistrict()->getNom(),
+                'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'regionId' => $participant->getGroupe()->getDistrict()->getRegion()->getId(),
                 'statut' => $participant->getStatut(),
                 'idTransaction' => $participant->getIdTransaction(),
                 'statusPaiement' => $participant->getStatusPaiement(),

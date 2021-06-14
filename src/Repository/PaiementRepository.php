@@ -19,6 +19,14 @@ class PaiementRepository extends ServiceEntityRepository
         parent::__construct($registry, Paiement::class);
     }
 
+    /**
+     * Liste des paiements selon la periode
+     * 
+     * @param null $region
+     * @param $debut
+     * @param $fin
+     * @return int|mixed|string
+     */
     public function findPeriodeParticipant($region=null, $debut, $fin)
     {
         $query = $this->getList();
@@ -40,6 +48,36 @@ class PaiementRepository extends ServiceEntityRepository
                     'debut' => $debut,
                     'fin' => $fin
                 ])
+            ;
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Liste des paiements selon le statut
+     *
+     * @param null $region
+     * @param null $statut
+     * @return int|mixed|string
+     */
+    public function findList($region=null, $statut=null)
+    {
+        $query = $this->getList();
+        if ($region){
+            $query->where('r.id = :region')
+                ->andWhere('p.statusPaiement = :statut')
+                ->orderBy('p.createdAt', 'DESC')
+                ->setParameters([
+                    'region' => $region,
+                    'statut' => $statut,
+                ])
+            ;
+        }else{
+            $query
+                ->where('p.statusPaiement = :statut')
+                ->orderBy('p.createdAt', 'DESC')
+                ->setParameter('statut', $statut)
             ;
         }
 

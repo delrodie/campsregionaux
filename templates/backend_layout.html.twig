@@ -131,8 +131,8 @@
                             <ul class="submenu megamenu">
                                 <li>
                                     <ul>
-                                        <li><a href="#">Validés</a></li>
-                                        <li><a href="#">Non validés</a></li>
+                                        <li><a href="{{ path('backend_paiement_index', {'statut': 'VALID'}) }}">Validés</a></li>
+                                        <li><a href="{{ path('backend_paiement_index', {'statut': 'UNKNOW'}) }}">Non validés</a></li>
                                     </ul>
                                 </li>
                             </ul>

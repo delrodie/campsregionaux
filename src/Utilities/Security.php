@@ -65,7 +65,7 @@ class Security
     public function gestionnaire()
     {
         $user = $this->security->getUser();
-        if ($user->getRoles()[0] === "ROLE_USER") {
+        if ($user->getRoles()[0] === "ROLE_USER" || $user->getRoles()[0] === "ROLE_DEV") {
             $region = $this->entityManager->getRepository(Gestionnaire::class)
                 ->findOneBy(['user' => $user->getId()])
                 ->getRegion()->getId();
