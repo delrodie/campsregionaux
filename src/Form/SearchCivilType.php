@@ -23,11 +23,11 @@ class SearchCivilType extends AbstractType
                 'label'=>"Prenoms"
             ])
             ->add('datenaiss', TextType::class,[
-                'attr'=>['class'=>"form-control datepicker", 'autocomplete'=>'off'],
+                'attr'=>['class'=>"form-control datepicker", 'autocomplete'=>'off', 'placeholder'=>"Date de naissance"],
                 'label' => "Date de naissance"
             ])
             ->add('lieunaiss', TextType::class,[
-                'attr'=>['class'=>'form-control', 'placeholder'=>"Lieu ", 'autocomplete'=>"off"],
+                'attr'=>['class'=>'form-control', 'placeholder'=>"Lieu de naissance", 'autocomplete'=>"off"],
                 'label'=>"Lieu de naissance"
             ])
         ;

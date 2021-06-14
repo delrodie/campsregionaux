@@ -8,11 +8,13 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ActiviteType extends AbstractType
 {
@@ -32,18 +34,37 @@ class ActiviteType extends AbstractType
                 'label' => 'Le lieu '
             ])
             ->add('debut', TextType::class,[
-                'attr'=>['class' => 'form-control', 'placeholder' => 'Date début', 'autocomplete' => 'off'],
+                'attr'=>['class' => 'form-control datepicker', 'placeholder' => 'Date début', 'autocomplete' => 'off'],
                 'label' => 'Debut période'
             ])
             ->add('fin', TextType::class,[
-                'attr'=>['class' => 'form-control', 'placeholder'=>'Date fin', 'autocomplete'=>'off'],
+                'attr'=>['class' => 'form-control datepicker', 'placeholder'=>'Date fin', 'autocomplete'=>'off'],
                 'label' => 'Fin periode'
             ])
             ->add('description', TextareaType::class,[
-                'attr'=>['class' => 'form-control', 'rows'=>5],
+                'attr'=>['class' => 'form-control', 'rows'=>5, 'placeholder'=>"Description"],
                 'label' => "Description"
             ])
-            ->add('logo')
+            ->add('logo', FileType::class,[
+                'attr'=>['class'=>"dropify", 'data-preview' => ".preview"],
+                'label' => "Télécharger la photo",
+                'mapped' => false,
+                'multiple' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => "1000000k",
+                        'mimeTypes' =>[
+                            'image/png',
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => "Votre fichier doit être de type image"
+                    ])
+                ],
+                'required' => false
+            ])
             //->add('createdAt')
             ->add('region', EntityType::class,[
                 'attr'=>['class' => 'form-control'],

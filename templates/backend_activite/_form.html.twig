@@ -1,4 +1,17 @@
 {{ form_start(form) }}
+    <div class="row form-group">
+        <div class="col-12 mb-3">{{ form_widget(form.region) }}</div>
+        <div class="col-12 mb-3 mt-3">{{ form_widget(form.nom) }}</div>
+        <div class="col-12 mb-3 mt-3">{{ form_widget(form.lieu) }}</div>
+        <div class="col-12 mb-3 mt-3">{{ form_widget(form.montant) }}</div>
+        <div class="col-12 mb-3 mt-3">{{ form_widget(form.description) }}</div>
+        <div class="col-12 mb-3 mt-3">{{ form_widget(form.debut) }}</div>
+        <div class="col-12 mb-3 mt-3">{{ form_widget(form.fin) }}</div>
+        <div class="col-12 mb-3 mt-3">{{ form_widget(form.logo) }}</div>
+    </div>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="text-right mt-5">
+        <a href="{{ path('backend_activite_index') }}" class="btn btn-outline-secondary">Annuler</a>
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    </div>
 {{ form_end(form) }}
