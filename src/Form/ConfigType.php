@@ -7,9 +7,11 @@ use App\Entity\Sygesca\Region;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ConfigType extends AbstractType
 {
@@ -32,13 +34,45 @@ class ConfigType extends AbstractType
                 'attr' =>['class'=>"form-control", 'placeholder'=>"La couleur theme", "autocomplete"=>"off"],
                 'label'=>"Theme"
             ])
-            ->add('bg', TextType::class,[
-                'attr' =>['class'=>"form-control", 'placeholder'=>"L'image background", "autocomplete"=>"off"],
-                'label'=>"Image"
+            ->add('bg', FileType::class,[
+                'attr'=>['class'=>"dropify", 'data-preview' => ".preview"],
+                'label' => "Télécharger le background",
+                'mapped' => false,
+                'multiple' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => "1000000k",
+                        'mimeTypes' =>[
+                            'image/png',
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => "Votre fichier doit être de type image"
+                    ])
+                ],
+                'required' => false
             ])
-            ->add('logoRegion', TextType::class,[
-                'attr' =>['class'=>"form-control", 'placeholder'=>"Le logo de la region", "autocomplete"=>"off"],
-                'label'=>"Logo"
+            ->add('logoRegion', FileType::class,[
+                'attr'=>['class'=>"dropify", 'data-preview' => ".preview"],
+                'label' => "Télécharger le logo de la region",
+                'mapped' => false,
+                'multiple' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => "1000000k",
+                        'mimeTypes' =>[
+                            'image/png',
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => "Votre fichier doit être de type image"
+                    ])
+                ],
+                'required' => false
             ])
             ->add('region', EntityType::class,[
                 'attr'=>['class' => 'form-control'],

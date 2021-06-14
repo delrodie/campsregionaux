@@ -33,3 +33,5 @@ services:
     App\Utilities\GestionMedia:
         arguments:
             $activiteDirectory: '%kernel.project_dir%/public/upload/activite'
+            $regionDirectory: '%kernel.project_dir%/public/upload/region'
+            $configDirectory: '%kernel.project_dir%/public/upload/config'

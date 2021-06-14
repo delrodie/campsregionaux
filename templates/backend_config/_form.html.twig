@@ -1,4 +1,23 @@
 {{ form_start(form) }}
+    <div class="row form-group">
+        <div class="col-12 mb-2 mt-3">{{ form_widget(form.region) }}</div>
+        <div class="col-12 mb-2 mt-3">{{ form_widget(form.apikey) }}</div>
+        <div class="col-12 mb-2 mt-3">{{ form_widget(form.siteId) }}</div>
+        <div class="col-12 mb-2 mt-3">{{ form_widget(form.couleurRGB) }}</div>
+        <div class="col-12 mb-2 mt-3">{{ form_widget(form.couleurTheme) }}</div>
+        <div class="col-12 mb-2 mt-3">
+            {{ form_label(form.logoRegion) }}
+            {{ form_widget(form.logoRegion) }}
+        </div>
+        <div class="col-12 mb-2 mt-3">
+            {{ form_label(form.bg) }}
+            {{ form_widget(form.bg) }}
+        </div>
+    </div>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="text-right mt-5">
+        <a href="{{ path('backend_config_index') }}" class="btn btn-outline-secondary">Annuler</a>
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+
 {{ form_end(form) }}
