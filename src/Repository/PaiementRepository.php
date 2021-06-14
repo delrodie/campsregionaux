@@ -25,8 +25,7 @@ class PaiementRepository extends ServiceEntityRepository
         if ($region){
             $query->where('r.id = :region')
                 ->andWhere('p.createdAt BETWEEN :debut AND :fin')
-                ->orderBy('p.nom', 'ASC')
-                ->addOrderBy('p.prenoms', 'ASC')
+                ->orderBy('p.createdAt', 'DESC')
                 ->setParameters([
                     'region' => $region,
                     'debut' => $debut,
@@ -36,8 +35,7 @@ class PaiementRepository extends ServiceEntityRepository
         }else{
             $query
                 ->where('p.createdAt BETWEEN :debut AND :fin')
-                ->orderBy('p.nom', 'ASC')
-                ->addOrderBy('p.prenoms', 'ASC')
+                ->orderBy('p.createdAt', 'DESC')
                 ->setParameters([
                     'debut' => $debut,
                     'fin' => $fin
@@ -58,7 +56,8 @@ class PaiementRepository extends ServiceEntityRepository
             ->leftJoin('p.activite', 'a')
             ->leftJoin('a.region', 'r')
             ->leftJoin('p.groupe', 'g')
-            ->leftJoin('g.district', 'd');
+            ->leftJoin('g.district', 'd')
+            ;
     }
 
     // /**

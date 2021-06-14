@@ -4,6 +4,7 @@
 namespace App\Utilities;
 
 
+use App\Entity\Config;
 use App\Entity\Paiement;
 use App\Entity\Participant;
 use Doctrine\ORM\EntityManagerInterface;
@@ -58,6 +59,7 @@ class Utility
 
         $listes=[]; $i=0;
         foreach ($participants as $participant){
+            //$config = $this->entityManager->getRepository(Config::class)->findByRegion($participant->getGroupe()->getDistrict()->getRegion()->getId());
             $listes[$i++]=[
                 'matricule' => $participant->getMatricule(),
                 'carte' => $participant->getCarte(),
@@ -70,7 +72,12 @@ class Utility
                 'groupe' => $participant->getGroupe()->getParoisse(),
                 'district' => $participant->getGroupe()->getDistrict()->getNom(),
                 'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
-                'statut' => $participant->getStatut()
+                'statut' => $participant->getStatut(),
+                'idTransaction' => $participant->getIdTransaction(),
+                'statusPaiement' => $participant->getStatusPaiement(),
+                'created' => $participant->getCreatedAt(),
+                'paieTelephone' => $participant->getPaieTelephone(),
+                //'config_siteId' => $config->getSiteId(),
             ];
         }
 

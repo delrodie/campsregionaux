@@ -5,7 +5,7 @@
 </a>
 <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
     <div class="dropdown-item noti-title">
-        <h5><span class="badge badge-danger float-right">{{ nombre }}</span>Notification</h5>
+        <h5><span class="badge badge-danger float-right">{{ nombre }}</span>Derniers inscrits</h5>
     </div>
 
     {% for liste in listes|slice(0,3) %}
@@ -19,7 +19,7 @@
     {% endfor %}
 
 
-    <a href="javascript:void(0);" class="dropdown-item notify-item">
+    <a href="{{ path('app_notification_liste') }}" class="dropdown-item notify-item">
         Voir plus
     </a>
 

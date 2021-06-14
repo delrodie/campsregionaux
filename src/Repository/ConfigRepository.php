@@ -19,6 +19,17 @@ class ConfigRepository extends ServiceEntityRepository
         parent::__construct($registry, Config::class);
     }
 
+    public function findByRegion($region)
+    {
+        return $this->createQueryBuilder('c')
+            ->addSelect('r')
+            ->leftJoin('c.region', 'r')
+            ->where('r.id = :region')
+            ->setParameter('region', $region)
+            ->getQuery()->getOneOrNullResult()
+            ;
+    }
+
     // /**
     //  * @return Config[] Returns an array of Config objects
     //  */

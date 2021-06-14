@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Config;
 use App\Utilities\GestionRegion;
 use App\Utilities\Utility;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,5 +40,29 @@ class NotificationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/liste", name="app_notification_liste", methods={"GET"})
+     */
+    public function liste(): Response
+    {
+        $listes = $this->utility->listeNouveauxParticipant(date('Y'),date('W'));
+        $nombre = count($listes);
+        $periode = $this->utility->week2str(date('Y'),date('W'));
+
+        // Utilisateur administrateur
+        if (!$this->session->get('region')){
+            return $this->render('notification/liste_admin.html.twig', [
+                'listes' => $listes,
+                'nombre' => $nombre,
+                'periode' => $periode
+            ]);
+        }
+
+        return $this->render('notification/liste.html.twig', [
+            'listes' => $listes,
+            'nombre' => $nombre,
+            'periode' => $periode
+        ]);
+    }
 
 }
