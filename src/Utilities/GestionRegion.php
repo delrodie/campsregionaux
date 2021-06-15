@@ -310,11 +310,11 @@ class GestionRegion
                 break;
             case 'ODIENNE':
                 $render = ['frontend'=>'odienne_index', 'backend'=>'backend_odienne_index'];
-                break;
+                break; */
             case 'SAN PEDRO':
                 $render = ['frontend'=>'sanpedro_index', 'backend'=>'backend_sanpedro_index'];
                 break;
-            case 'YAMOUSSOUKRO':
+            /*case 'YAMOUSSOUKRO':
                 $render = ['frontend'=>'yakro_index', 'backend'=>'backend_yakro_index'];
                 break;*/
             case 'YOPOUGON':
