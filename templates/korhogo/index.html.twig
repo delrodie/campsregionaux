@@ -1,8 +1,8 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}ASCCI :: ABIDJAN{% endblock %}
+{% block title %}ASCCI :: {{ activite.region.nom|upper }}{% endblock %}
 {% block meta %}
-    <meta name="description" content="Inscription au camp {{ activite.nom }} de la région de DALOA qui se tiendra du {{ activite.debut|date('d/m/Y') }} au {{ activite.fin|date('d/m/Y') }} à {{ activite.lieu }}">
+    <meta name="description" content="Inscription au camp {{ activite.nom }} de la région de {{ activite.region.nom}} qui se tiendra du {{ activite.debut|date('d/m/Y') }} au {{ activite.fin|date('d/m/Y') }} à {{ activite.lieu }}">
 {% endblock %}
 
 {% block menu %}
