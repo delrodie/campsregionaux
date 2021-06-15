@@ -266,6 +266,67 @@ class GestionRegion
 
         return $render;
     }
+    /**
+     * Le template de badge
+     *
+     * @param $region
+     * @return string
+     */
+    public function url($region)
+    {
+        switch ($region){
+            /*case 'ABENGOUROU':
+                $render = ['frontend'=>'abengourou_index', 'backend'=>'backend_abengourou_index'];
+                break;*/
+            case 'ABIDJAN':
+                $render = ['frontend'=>'abidjan_index', 'backend'=>'backend_abidjan_index'];
+                break;
+            /*case 'AGBOVILLE':
+                $render = ['frontend'=>'agboville_index', 'backend'=>'backend_agboville_index'];
+                break;
+            case 'BONDOUKOU':
+                $render = ['frontend'=>'bondoukou_index', 'backend'=>'backend_bondoukou_index'];
+                break;
+            case 'BOUAKE':
+                $render = ['frontend'=>'bouake_index', 'backend'=>'backend_bouake_index'];
+                break;*/
+            case 'DALOA':
+                $render = ['frontend'=>'daloa_index', 'backend'=>'backend_daloa_index'];
+                break;
+            /*case 'GAGNOA':
+                $render = ['frontend'=>'gagnoa_index', 'backend'=>'backend_gagnoa_index'];
+                break;*/
+            case 'GRAND BASSAM':
+                $render = ['frontend'=>'bassam_index', 'backend'=>'backend_bassam_index'];
+                break;
+            /*case 'KATIOLA':
+                $render = ['frontend'=>'katiola_index', 'backend'=>'backend_katiola_index'];
+                break;
+            case 'KORHOGO':
+                $render = ['frontend'=>'korhogo_index', 'backend'=>'backend_korhogo_index'];
+                break;
+            case 'MAN':
+                $render = ['frontend'=>'man_index', 'backend'=>'backend_man_index'];
+                break;
+            case 'ODIENNE':
+                $render = ['frontend'=>'odienne_index', 'backend'=>'backend_odienne_index'];
+                break;
+            case 'SAN PEDRO':
+                $render = ['frontend'=>'sanpedro_index', 'backend'=>'backend_sanpedro_index'];
+                break;
+            case 'YAMOUSSOUKRO':
+                $render = ['frontend'=>'yakro_index', 'backend'=>'backend_yakro_index'];
+                break;*/
+            case 'YOPOUGON':
+                $render = ['frontend'=>'yopougon_index', 'backend'=>'backend_yopougon_index'];
+                break;
+            default:
+                $render = ['frontend'=>'app_home', 'backend'=>'backend_dashboard'];
+                break;
+        }
+
+        return $render;
+    }
 
     public function montantParticipation($region)
     {

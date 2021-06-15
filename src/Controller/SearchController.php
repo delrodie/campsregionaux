@@ -26,6 +26,28 @@ class SearchController extends AbstractController
     }
 
     /**
+     * @Route("/", name="app_lien_region")
+     */
+    public function lien()
+    {
+        $regions = $this->getDoctrine()->getRepository(Region::class)->liste()->getQuery()->getResult();
+
+        $listes=[]; $i=0;
+        foreach ($regions as $region){
+            $listes[$i++]=[
+                'code' => $region->getCode(),
+                'nom' => $region->getNom(),
+                'frontend' => $this->gestionRegion->url($region->getNom())['frontend'],
+                'backend' => $this->gestionRegion->url($region->getNom())['backend'],
+            ];
+        }
+
+        return $this->render('backend/lien.html.twig',[
+            'listes' => $listes
+        ]);
+    }
+
+    /**
      * @Route("/{region}", name="app_search_matricule", methods={"GET","POST"})
      */
     public function matricule(Request $request, Region $region)

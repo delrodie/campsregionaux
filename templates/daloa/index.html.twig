@@ -19,7 +19,7 @@
                         <div class="row align-items-center">
                             <div class="col-sm-12 d-md-none mb-5">
                                 <div class="banner-img-02 text-center">
-                                    <img src="{{ absolute_url(asset('/assets/fontend/images/region/logo/daloa.png')) }}" class="img-fluid" alt="" width="250">
+                                    <img src="{{ absolute_url(asset('/upload/activite/'~ activite.logo)) }}" class="img-fluid" alt="{{ activite.nom }}" width="250">
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-lg-5 d-none d-md-block">
                                 <div class="banner-img-02">
-                                    <img src="{{ absolute_url(asset('/assets/fontend/images/region/logo/daloa.png')) }}" class="img-fluid" alt="">
+                                    <img src="{{ absolute_url(asset('/upload/activite/'~ activite.logo)) }}" class="img-fluid" alt="{{ activite.nom }}">
                                 </div>
                             </div>
                         </div>
