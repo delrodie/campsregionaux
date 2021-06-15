@@ -1,6 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}ASCCI :: DALOA{% endblock %}
+{% block meta %}
+    <meta name="description" content="Inscription au camp {{ activite.nom }} de la région de DALOA qui se tiendra du {{ activite.debut|date('d/m/Y') }} au {{ activite.fin|date('d/m/Y') }} à {{ activite.lieu }}">
+{% endblock %}
 
 {% block menu %}
     {{ include('daloa/menu_daloa.html.twig') }}

@@ -3,7 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="description" content="Systeme Integré des Camps Regionaux">
+
+        {% block meta %}
+            <meta name="description" content="Systeme Integré des Camps Regionaux">
+        {% endblock %}
         <meta name="author" content="ASCCI, Delrodie AMOIKON">
         <title>{% block title %}ASCCI :: SICRE{% endblock %}</title>
         <link rel="shortcut icon" href="{{ absolute_url(asset('/assets/ascci.png')) }}" type="image/ico">
