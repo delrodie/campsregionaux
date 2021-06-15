@@ -301,11 +301,11 @@ class GestionRegion
                 break;
             /*case 'KATIOLA':
                 $render = ['frontend'=>'katiola_index', 'backend'=>'backend_katiola_index'];
-                break;
+                break; */
             case 'KORHOGO':
                 $render = ['frontend'=>'korhogo_index', 'backend'=>'backend_korhogo_index'];
                 break;
-            case 'MAN':
+            /*case 'MAN':
                 $render = ['frontend'=>'man_index', 'backend'=>'backend_man_index'];
                 break;
             case 'ODIENNE':
