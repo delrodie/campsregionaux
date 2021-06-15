@@ -286,10 +286,10 @@ class GestionRegion
                 break;
             case 'BONDOUKOU':
                 $render = ['frontend'=>'bondoukou_index', 'backend'=>'backend_bondoukou_index'];
-                break;
+                break;*/
             case 'BOUAKE':
                 $render = ['frontend'=>'bouake_index', 'backend'=>'backend_bouake_index'];
-                break;*/
+                break;
             case 'DALOA':
                 $render = ['frontend'=>'daloa_index', 'backend'=>'backend_daloa_index'];
                 break;
