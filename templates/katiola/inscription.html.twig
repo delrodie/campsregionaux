@@ -1,0 +1,123 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent()}} Inscription au camp{% endblock %}
+
+{% block menu %}
+    {{ include('katiola/menu_katiola.html.twig') }}
+{% endblock %}
+{% block style %}
+    {{ include('style.html.twig',{'couleurRGB': config.rgb, 'couleurTheme': config.theme, 'bg': config.bg}) }}
+{% endblock %}
+
+{% block body %}
+    <section class="inner-header-bg">
+        <div class="container">
+            <!-- Breadcrumb Start-->
+            <div class="section-breadcrumb">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 justify-content-center align-self-center pb-2">
+                            <div class="breadcrumb-content">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Breadcrumb End -->
+        </div>
+    </section>
+    <section class="section contactus-section" id="participation">
+        <div class="container">
+            <div class="wow fadeInUp" data-wow-duration="1.0s">
+                <div class="title-section">
+                    <div class="subtitle-hr d-flex align-items-center">
+                        <h6 class="subtitle theme-color text-uppercase position-relative">Participation</h6>
+                        <hr>
+                    </div>
+                    <h2 class="title text-md-left text-center f-40">Je m'inscris au {{ activite.nom }}</h2>
+                </div>
+                <form class="common-input-form mt-3"  action="{{ absolute_url(path('app_inscription')) }}" id="inscription" name="inscription" method="post">
+                    <div class="row form-group">
+                        <div class="col-md-6 mb-3">
+                            <label for="">Matricule</label>
+                            <input type="text" class="form-control border-0"  name="inscription_matricule" value="{{ scout.matricule }}" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Carte</label>
+                            <input type="text" class="form-control border-0"  name="inscription_carte" value="{{ scout.carte }}" readonly>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="">Nom</label>
+                            <input type="text" class="form-control border-0" name="inscription_nom" value="{{ scout.nom }}" readonly>
+                        </div>
+                        <div class="col-md-7 mb-3">
+                            <label for="">Prenoms</label>
+                            <input type="text" class="form-control border-0" name="inscription_prenom" value="{{ scout.prenoms }}" readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="">Sexe</label>
+                            <input type="text" class="form-control border-0" name="inscription_sexe" value="{{ scout.sexe }}" readonly>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="">Date de naissance</label>
+                            <input type="text" class="form-control border-0" name="inscription_date_naissance" value="{{ scout.dateNaiss }}" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="">Lieu de naissance</label>
+                            <input type="text" class="form-control border-0" name="inscription_lieu_naissance" value="{{ scout.lieuNaiss }}" readonly>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="">Fonction</label>
+                            <input type="text" class="form-control border-0" name="inscription_fonction" value="{{ scout.fonction }}" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="inscription_district">District <span style="color: red; font-weight: 700;">*</span></label>
+                            <select name="district" id="inscription_district" class="form-control" required>
+                                <option value="">--</option>
+                                {% for district in districts %}
+                                    <option value="{{ district.id }}">{{ district.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="hidden" id="url" value="{{ absolute_url(path("requete_ajax")) }}">
+                        <div class="col-md-6 mb-3">
+                            <label for="inscription_groupe">Groupe <span style="color: red; font-weight: 700;">*</span></label>
+                            <select name="inscription_groupe" id="inscription_groupe" class="form-control" required>
+                            </select>
+                        </div>
+                        <input type="hidden" name="inscription_region" value="{{ region.slug }}">
+                        <input type="hidden" name="inscription_scout" value="{{ scout.slug }}">
+                        <input type="hidden" name="inscription_activite" value="{{ activite.id }}">
+
+                        <div class="col mt-3 mb-5 text-center">
+                            Participation: <strong><span style="font-size: 1.7rem; color: red; font-weight: 800;">{{ montant|number_format(0,'','.') }}</span> FCFA</strong>
+                        </div>
+
+
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="mt-2 btn theme-btn contact-form-btn border-0" value="Send">S'INSCRIRE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <div id="loader"></div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .contactus-section input.form-control {
+            height: 38px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: darkblue;
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('assets/js/formulaire.js')) }}"></script>
+{% endblock %}

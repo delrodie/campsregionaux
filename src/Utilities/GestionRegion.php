@@ -299,9 +299,9 @@ class GestionRegion
             case 'GRAND BASSAM':
                 $render = ['frontend'=>'bassam_index', 'backend'=>'backend_bassam_index'];
                 break;
-            /*case 'KATIOLA':
+            case 'KATIOLA':
                 $render = ['frontend'=>'katiola_index', 'backend'=>'backend_katiola_index'];
-                break; */
+                break;
             case 'KORHOGO':
                 $render = ['frontend'=>'korhogo_index', 'backend'=>'backend_korhogo_index'];
                 break;
