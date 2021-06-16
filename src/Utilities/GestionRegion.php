@@ -284,9 +284,9 @@ class GestionRegion
             case 'AGBOVILLE':
                 $render = ['frontend'=>'agboville_index', 'backend'=>'backend_agboville_index'];
                 break;
-            /*case 'BONDOUKOU':
+            case 'BONDOUKOU':
                 $render = ['frontend'=>'bondoukou_index', 'backend'=>'backend_bondoukou_index'];
-                break;*/
+                break;
             case 'BOUAKE':
                 $render = ['frontend'=>'bouake_index', 'backend'=>'backend_bouake_index'];
                 break;
