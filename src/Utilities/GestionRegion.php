@@ -305,9 +305,9 @@ class GestionRegion
             case 'KORHOGO':
                 $render = ['frontend'=>'korhogo_index', 'backend'=>'backend_korhogo_index'];
                 break;
-            /*case 'MAN':
+            case 'MAN':
                 $render = ['frontend'=>'man_index', 'backend'=>'backend_man_index'];
-                break;*/
+                break;
             case 'ODIENNE':
                 $render = ['frontend'=>'odienne_index', 'backend'=>'backend_odienne_index'];
                 break;
