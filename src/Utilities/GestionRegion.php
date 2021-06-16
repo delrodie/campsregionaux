@@ -281,10 +281,10 @@ class GestionRegion
             case 'ABIDJAN':
                 $render = ['frontend'=>'abidjan_index', 'backend'=>'backend_abidjan_index'];
                 break;
-            /*case 'AGBOVILLE':
+            case 'AGBOVILLE':
                 $render = ['frontend'=>'agboville_index', 'backend'=>'backend_agboville_index'];
                 break;
-            case 'BONDOUKOU':
+            /*case 'BONDOUKOU':
                 $render = ['frontend'=>'bondoukou_index', 'backend'=>'backend_bondoukou_index'];
                 break;*/
             case 'BOUAKE':

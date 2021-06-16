@@ -36,7 +36,7 @@
                                     {% for config in configs %}
                                         <tr>
                                             <td class="text-right">{{ loop.index }}</td>
-                                            <td class="text-center"><img class="rounded-circle" src="{{ absolute_url(asset('/upload/region/'~ config.logoRegion)) }}" alt="user" width="30"></td>
+                                            <td class="text-center"><img class="rounded-circle" src="{{ absolute_url(asset('/upload/region/'~ config.logoRegion)) }}" alt="logo region" width="30"></td>
                                             <td>
                                                 <a href="{{ path('backend_config_edit', {'id': config.id}) }}">{{ config.region.nom }}</a>
 
