@@ -39,7 +39,7 @@ class GestionRegion
      */
     public function getConfig($region)
     {
-        $config = $this->entityManager->getRepository(Config::class)->findOneBy(['region'=>$region]);
+        $config = $this->entityManager->getRepository(Config::class)->findOneBy(['region'=>$region]); //dd($region);
 
         return $value = [
             'rgb' => $config->getCouleurRGB(),
@@ -275,9 +275,9 @@ class GestionRegion
     public function url($region)
     {
         switch ($region){
-            /*case 'ABENGOUROU':
+            case 'ABENGOUROU':
                 $render = ['frontend'=>'abengourou_index', 'backend'=>'backend_abengourou_index'];
-                break;*/
+                break;
             case 'ABIDJAN':
                 $render = ['frontend'=>'abidjan_index', 'backend'=>'backend_abidjan_index'];
                 break;

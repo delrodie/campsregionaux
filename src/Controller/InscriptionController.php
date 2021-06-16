@@ -56,7 +56,7 @@ class InscriptionController extends AbstractController
         if ($scout){
             // Recherche des entités
             $groupe = $this->getDoctrine()->getRepository(Groupe::class)->findOneBy(['id'=>$groupeId]);
-            $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionsSlug]); //dd($region);
+            $region = $this->getDoctrine()->getRepository(Region::class)->findOneBy(['slug'=>$regionsSlug]); //die($region); //dd($region);
             $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['id'=>$activiteId]);
             $statut = $this->getDoctrine()->getRepository(Statut::class)->findOneBy(['id'=>$scout->getStatut()]);
             $montant = $this->gestionRegion->montantParticipation($region->getId());
@@ -186,7 +186,6 @@ class InscriptionController extends AbstractController
         $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['slug'=>$slug]);
         $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region->getId()], ['id'=>"DESC"]);
         $montant = $this->gestionRegion->montantParticipation($region->getId()); //dd($montant);
-
 
 
         return $this->render($this->gestionRegion->renderInscription($region->getNom()),[

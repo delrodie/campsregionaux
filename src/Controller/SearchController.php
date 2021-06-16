@@ -64,7 +64,7 @@ class SearchController extends AbstractController
             $scout = $this->getDoctrine()->getRepository(Scout::class, 'sygesca')->findOneBy(['matricule'=> $matricule]);
 
             // Si le scout existe alors renvoyer a abidjan_inscription
-            if ($scout){
+            if ($scout){ //dd($region->getSlug());
                 return $this->redirectToRoute('app_search_result', [
                     'regionSlug' => $region->getSlug(),
                     'slug' => $scout->getSlug(),
