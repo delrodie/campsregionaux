@@ -307,10 +307,10 @@ class GestionRegion
                 break;
             /*case 'MAN':
                 $render = ['frontend'=>'man_index', 'backend'=>'backend_man_index'];
-                break;
+                break;*/
             case 'ODIENNE':
                 $render = ['frontend'=>'odienne_index', 'backend'=>'backend_odienne_index'];
-                break; */
+                break;
             case 'SAN PEDRO':
                 $render = ['frontend'=>'sanpedro_index', 'backend'=>'backend_sanpedro_index'];
                 break;
