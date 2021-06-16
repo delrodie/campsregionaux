@@ -130,7 +130,7 @@ class GestionRegion
                 $render = 'sanpedro/index.html.twig';
                 break;
             case 'YAMOUSSOUKRO':
-                $render = 'yako/index.html.twig';
+                $render = 'yakro/index.html.twig';
                 break;
             case 'YOPOUGON':
                 $render = 'yopougon/index.html.twig';
@@ -192,7 +192,7 @@ class GestionRegion
                 $render = 'sanpedro/inscription.html.twig';
                 break;
             case 'YAMOUSSOUKRO':
-                $render = 'yako/inscription.html.twig';
+                $render = 'yakro/inscription.html.twig';
                 break;
             case 'YOPOUGON':
                 $render = 'yopougon/inscription.html.twig';
@@ -254,7 +254,7 @@ class GestionRegion
                 $render = 'sanpedro/search_badge.html.twig';
                 break;
             case 'YAMOUSSOUKRO':
-                $render = 'yako/search_badge.html.twig';
+                $render = 'yakro/search_badge.html.twig';
                 break;
             case 'YOPOUGON':
                 $render = 'yopougon/search_badge.html.twig';
@@ -314,9 +314,9 @@ class GestionRegion
             case 'SAN PEDRO':
                 $render = ['frontend'=>'sanpedro_index', 'backend'=>'backend_sanpedro_index'];
                 break;
-            /*case 'YAMOUSSOUKRO':
+            case 'YAMOUSSOUKRO':
                 $render = ['frontend'=>'yakro_index', 'backend'=>'backend_yakro_index'];
-                break;*/
+                break;
             case 'YOPOUGON':
                 $render = ['frontend'=>'yopougon_index', 'backend'=>'backend_yopougon_index'];
                 break;
