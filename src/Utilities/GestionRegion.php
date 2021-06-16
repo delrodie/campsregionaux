@@ -293,9 +293,9 @@ class GestionRegion
             case 'DALOA':
                 $render = ['frontend'=>'daloa_index', 'backend'=>'backend_daloa_index'];
                 break;
-            /*case 'GAGNOA':
+            case 'GAGNOA':
                 $render = ['frontend'=>'gagnoa_index', 'backend'=>'backend_gagnoa_index'];
-                break;*/
+                break;
             case 'GRAND BASSAM':
                 $render = ['frontend'=>'bassam_index', 'backend'=>'backend_bassam_index'];
                 break;
