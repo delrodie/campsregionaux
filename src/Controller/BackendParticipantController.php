@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Entity\Sygesca\District;
+use App\Entity\Sygesca\Region;
 use App\Repository\ParticipantRepository;
 use App\Utilities\GestionRegion;
 use App\Utilities\Utility;
@@ -33,19 +35,41 @@ class BackendParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/", name="backend_participant_index")
+     * @Route("/", name="backend_participant_index", methods={"GET","POST"})
      */
-    public function index(ParticipantRepository $participantRepository): Response
+    public function index(Request $request, ParticipantRepository $participantRepository): Response
     {
         $regionSession = $this->session->get('region');
         if (!$regionSession){
+            $region = $request->get('region');
+            if ($region){
+                $listes = $this->utility->listeParticipants($region);
+                $title = "Liste ".$this->getDoctrine()->getRepository(Region::class)->findOneBy(['id'=>$region])->getNom();
+            }else{
+                $listes = $this->utility->listeParticipants();
+                $title = "Liste globale des participants";
+            }
+
             return $this->render('backend_participant/liste_admin.html.twig',[
-                'listes' => $this->utility->listeParticipants()
+                'listes' => $listes,
+                'regions' => $this->getDoctrine()->getRepository(Region::class)->liste()->getQuery()->getResult(),
+                'title' => $title
             ]);
         }
 
+        $district = $request->get('district');
+        if ($district){
+            $listes = $this->utility->listeParticipantByDistrict($district);
+            $title = "Liste ".$this->getDoctrine()->getRepository(District::class)->findOneBy(['id'=>$district])->getNom();
+        }else{
+            $listes = $this->utility->listeParticipants();
+            $title = "Liste globale des participants";
+        }
+
         return $this->render('backend_participant/index.html.twig', [
-            'listes' => $this->utility->listeParticipants(),
+            'listes' => $listes,
+            'districts' => $this->utility->nombreParticipantParDistrict(),
+            'title' => $title
         ]);
     }
 

@@ -25,9 +25,12 @@ class Utility
         $this->session = $session;
     }
 
-    public function listeParticipants()
+    public function listeParticipants($regionId=null)
     {
-        $participants = $this->entityManager->getRepository(Participant::class)->findList($this->session->get('region'));
+        if (!$regionId) $region = $this->session->get('region');
+        else $region = $regionId;
+
+        $participants = $this->entityManager->getRepository(Participant::class)->findList($region);
 
         $listes=[]; $i=0;
         foreach ($participants as $participant){
@@ -42,6 +45,32 @@ class Utility
                 'slug' => $participant->getSlug(),
                 'groupe' => $participant->getGroupe()->getParoisse(),
                 'district' => $participant->getGroupe()->getDistrict()->getNom(),
+                'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'regionSlug' => $participant->getGroupe()->getDistrict()->getRegion()->getSlug(),
+            ];
+        }
+
+        return $listes;
+    }
+
+    public function listeParticipantByDistrict($district)
+    {
+        $participants = $this->entityManager->getRepository(Participant::class)->findByDistrict($district);
+
+        $listes=[]; $i=0;
+        foreach ($participants as $participant){
+            $listes[$i++]=[
+                'matricule' => $participant->getMatricule(),
+                'carte' => $participant->getCarte(),
+                'nom' => $participant->getNom(),
+                'prenom' => $participant->getPrenom(),
+                'sexe' => $participant->getSexe(),
+                'fonction' => $participant->getFonction(),
+                'montant' => $participant->getActivite()->getMontant(),
+                'slug' => $participant->getSlug(),
+                'groupe' => $participant->getGroupe()->getParoisse(),
+                'district' => $participant->getGroupe()->getDistrict()->getNom(),
+                'districtSlug' => $participant->getGroupe()->getDistrict()->getSlug(),
                 'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
                 'regionSlug' => $participant->getGroupe()->getDistrict()->getRegion()->getSlug(),
             ];
