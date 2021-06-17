@@ -48,9 +48,9 @@ class GestionRegion
         ];
     }
 
-    public function badge($matricule)
+    public function badge($matricule, $region)
     {
-        $participation = $this->entityManager->getRepository(Participant::class)->getBadge($matricule);
+        $participation = $this->entityManager->getRepository(Participant::class)->getBadge($matricule, $region);
 
         if($participation){
             $config = $this->entityManager->getRepository(Config::class)->findOneBy(['region'=>$participation->getActivite()->getRegion()->getId()]);

@@ -24,7 +24,7 @@ class ParticipantRepository extends ServiceEntityRepository
      * @return int|mixed|string|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getBadge($matricule)
+    public function getBadge($matricule, $region)
     {
         return $this->createQueryBuilder('p')
             ->addSelect('a')
@@ -36,7 +36,11 @@ class ParticipantRepository extends ServiceEntityRepository
             ->leftJoin('p.groupe', 'g')
             ->leftJoin('g.district', 'd')
             ->where('p.matricule = :matricule')
-            ->setParameter('matricule', $matricule)
+            ->andWhere('r.slug = :region')
+            ->setParameters([
+                'matricule' => $matricule,
+                'region' => $region
+        ])
             ->getQuery()->getOneOrNullResult()
             ;
     }

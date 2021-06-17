@@ -96,10 +96,51 @@ class InscriptionController extends AbstractController
                     return $this->json($message);
 
                 }else{
-                    $message = [
-                        'msg' => "Vous êtes déjà inscrit(e)",
-                        'status' => false
-                    ];
+                    // Si les activité sont différentes alors enregistrer la nouvelle participation
+                    if ($activite !== $verifPaiement->getActivite()){
+                        // enregistrement dans la table paiement;
+                        $paiement = new Paiement();
+
+                        $paiement->setIdTransaction($id_transaction);
+                        $paiement->setStatusPaiement($status_paiement);
+                        $paiement->setNom($scout->getNom());
+                        $paiement->setPrenoms($scout->getPrenoms());
+                        $paiement->setSexe($scout->getSexe());
+                        $paiement->setDateNaissance($scout->getDatenaiss());
+                        $paiement->setLieuNaissance($scout->getLieunaiss());
+                        $paiement->setCarte($scout->getCarte());
+                        $paiement->setMatricule($scout->getMatricule());
+                        $paiement->setFonction($scout->getFonction());
+                        $paiement->setContact($scout->getContact());
+                        $paiement->setUrgence($scout->getUrgence());
+                        $paiement->setContactUrgence($scout->getContactparent());
+                        $paiement->setSlug($scout->getSlug());
+                        $paiement->setMontant($montant);
+                        $paiement->setActivite($activite);
+                        $paiement->setGroupe($groupe);
+                        $paiement->setType($statut);
+
+                        $em->persist($paiement);
+                        $em->flush();
+
+                        $message = [
+                            'id' => $id_transaction,
+                            'status' => true,
+                            'amount' => $montant,
+                            'slug' => $paiement->getSlug(),
+                            'apiKey' => $config->getApikey(),
+                            'siteId' => $config->getSiteId()
+                        ];
+
+                        //return $this->json($message);
+                        //return $this->render('home/index.html.twig');
+                    }else{
+                        $message = [
+                            'msg' => "Vous êtes déjà inscrit(e)",
+                            'status' => false
+                        ];
+                    }
+
                 }
 
                 return $this->json($message);

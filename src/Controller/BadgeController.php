@@ -36,7 +36,7 @@ class BadgeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $matricule = $search->getMatricule();
-            $scout = $this->gestionRegion->badge($matricule);
+            $scout = $this->gestionRegion->badge($matricule, $regionSlug);
 
             if ($scout){
                 return $this->render('home/badge.html.twig',[
