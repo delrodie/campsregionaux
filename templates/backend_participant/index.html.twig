@@ -40,7 +40,7 @@
                                             <td>{{ liste.district }}</td>
                                             <td>{{ liste.groupe }}</td>
                                             <td class="text-center">
-                                                <a href="{{ path('backend_participant_show', {'matricule': liste.matricule}) }}" target="_blank">{{ liste.matricule }}</a>
+                                                <a href="{{ path('backend_participant_show', {'matricule': liste.matricule, 'region': liste.regionSlug}) }}" target="_blank">{{ liste.matricule }}</a>
                                             </td>
                                             <td class="text-center">{{ liste.carte }}</td>
                                             <td>{{ liste.nom|upper }} {{ liste.prenom|title }}</td>

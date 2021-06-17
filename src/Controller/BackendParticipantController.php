@@ -7,6 +7,7 @@ use App\Repository\ParticipantRepository;
 use App\Utilities\GestionRegion;
 use App\Utilities\Utility;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,9 +52,10 @@ class BackendParticipantController extends AbstractController
     /**
      * @Route("/{matricule}", name="backend_participant_show", methods={"GET"})
      */
-    public function show($matricule)
+    public function show(Request $request, $matricule)
     {
-        $scout = $this->gestionRegion->badge($matricule);
+        $region = $request->get('region');
+        $scout = $this->gestionRegion->badge($matricule,$region);
 
         if ($scout){
             return $this->render('home/badge.html.twig',[

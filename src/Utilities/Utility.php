@@ -43,6 +43,7 @@ class Utility
                 'groupe' => $participant->getGroupe()->getParoisse(),
                 'district' => $participant->getGroupe()->getDistrict()->getNom(),
                 'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'regionSlug' => $participant->getGroupe()->getDistrict()->getRegion()->getSlug(),
             ];
         }
 
