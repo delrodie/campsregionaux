@@ -7,6 +7,8 @@ namespace App\Utilities;
 use App\Entity\Config;
 use App\Entity\Paiement;
 use App\Entity\Participant;
+use App\Entity\Sygesca\District;
+use App\Entity\Sygesca\Region;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -93,6 +95,12 @@ class Utility
     }
 
 
+    /**
+     * Liste des paiement
+     * 
+     * @param $statut
+     * @return array
+     */
     public function listPaiement($statut)
     {
         $participants = $this->entityManager->getRepository(Paiement::class)
@@ -127,6 +135,119 @@ class Utility
         }
 
         return $listes;
+    }
+
+    public function listByBranche($branche)
+    {
+        $participants = $this->entityManager->getRepository(Participant::class)
+            ->findByBranche(
+                $branche,
+                $this->session->get('region')
+            ); //dd($participants);
+
+        $listes=[]; $i=0;
+        foreach ($participants as $participant){
+            //$config = $this->entityManager->getRepository(Config::class)->findByRegion($participant->getGroupe()->getDistrict()->getRegion()->getId());
+            $listes[$i++]=[
+                'matricule' => $participant->getMatricule(),
+                'carte' => $participant->getCarte(),
+                'nom' => $participant->getNom(),
+                'prenom' => $participant->getPrenom(),
+                'sexe' => $participant->getSexe(),
+                'fonction' => $participant->getFonction(),
+                'montant' => $participant->getActivite()->getMontant(),
+                'slug' => $participant->getSlug(),
+                'groupe' => $participant->getGroupe()->getParoisse(),
+                'district' => $participant->getGroupe()->getDistrict()->getNom(),
+                'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'regionId' => $participant->getGroupe()->getDistrict()->getRegion()->getId(),
+                'statut' => $participant->getStatut(),
+                //'idTransaction' => $participant->getIdTransaction(),
+                //'statusPaiement' => $participant->getStatusPaiement(),
+                'created' => $participant->getCreatedAt(),
+                'paieTelephone' => $participant->getPaieTelephone(),
+                //'config_siteId' => $config->getSiteId(),
+            ];
+        }
+
+        return $listes;
+    }
+
+    /**
+     * Nombre de participant par type
+     *
+     * @param $type
+     * @return int
+     */
+    public function getNombreByType($type)
+    { //dd($type);
+        $participants = $this->entityManager->getRepository(Participant::class)
+            ->findByType($type, $this->session->get('region')); //dd($participants);
+
+        return count($participants);
+    }
+
+    /**
+     * Nombre de participants par district
+     *
+     * @return array
+     */
+    public function nombreParticipantParDistrict()
+    {
+        $districts = $this->entityManager->getRepository(District::class)
+            ->findByRegion(
+                $this->session->get('region')
+            );
+
+        $districtList = [];$i=0;
+        foreach ($districts as $district){
+            $participants = $this->entityManager->getRepository(Participant::class)->findByDistrict($district->getId());
+
+            $districtList[$i++] = [
+                'id' => $district->getId(),
+                'nom' => $district->getNom(),
+                'slug' => $district->getSlug(),
+                'participant' => count($participants)
+            ];
+        }
+
+        return $districtList;
+    }
+
+    public function nombreParticipantParRegion()
+    {
+        $regions = $this->entityManager->getRepository(Region::class)->liste()->getQuery()->getResult();
+
+        $regionList = []; $i=0;
+        foreach ($regions as  $region){
+            $participants = $this->entityManager->getRepository(Participant::class)->findByRegion($region->getId());
+
+            $regionList[$i++] = [
+                'id' => $region->getId(),
+                'nom' => $region->getNom(),
+                'slug' => $region->getSlug(),
+                'participant' => count($participants)
+            ];
+        }
+
+        return $regionList;
+    }
+
+    /**
+     * Les branches
+     *
+     * @return string[]
+     */
+    public function branche()
+    {
+        $branche = [
+            'louveteau' => "LOUVETEAU (8 - 11 ANS)",
+            'eclaireur' => "ECLAIREUR (12 - 14 ANS)",
+            'cheminot' => "CHEMINOT (15 - 17 ANS)",
+            'routier' => "ROUTIER (18 - 21 ANS)"
+        ];
+
+        return $branche;
     }
 
     /**

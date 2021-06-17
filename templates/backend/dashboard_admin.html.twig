@@ -191,11 +191,11 @@
             type: 'bar',
             data: {
                 labels: [
-                    {% for district in districts %} '{{ district.nom }}', {% endfor %}
+                    {% for district in regions %} '{{ district.nom }}', {% endfor %}
                 ],
                 datasets: [{
                     label: '# participants',
-                    data: [{% for district in districts %} {{ district.participant }}, {% endfor %}],
+                    data: [{% for district in regions %} {{ district.participant }}, {% endfor %}],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.5)',
                     ],

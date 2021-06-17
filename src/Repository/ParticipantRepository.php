@@ -45,6 +45,11 @@ class ParticipantRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * Liste des participants par Region
+     * @param null $region
+     * @return int|mixed|string
+     */
     public function findList($region=null)
     {
         $query = $this->getList();
@@ -63,6 +68,86 @@ class ParticipantRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function findByType($type, $region=null)
+    {
+        $query = $this->getList();
+        if ($region){
+            $query->where('r.id = :region')
+                ->andWhere('t.libelle = :type')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenom', 'ASC')
+                ->setParameters([
+                    'region' => $region,
+                    'type' => $type
+                ])
+            ;
+        }else{
+            $query->where('t.libelle = :type')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenom', 'ASC')
+                ->setParameter('type', $type)
+            ;
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function findByBranche($branche, $region=null)
+    {
+        $query = $this->getList();
+        if ($region){
+            $query->where('r.id = :region')
+                ->andWhere('p.fonction = :branche')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenom', 'ASC')
+                ->setParameters([
+                    'region' => $region,
+                    'branche' => $branche
+                ])
+            ;
+        }else{
+            $query->where('p.fonction = :branche')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenom', 'ASC')
+                ->setParameter('branche', $branche)
+            ;
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Liste par district
+     *
+     * @param $district
+     * @return int|mixed|string
+     */
+    public function findByDistrict($district)
+    {
+        $query = $this->getList()
+            ->where('d.id = :district')
+            ->setParameter('district', $district)
+            ->orderBy('p.nom', "ASC")
+            ->addOrderBy('p.prenom', "ASC")
+            ->getQuery()->getResult()
+            ;
+
+        return $query;
+    }
+
+    public function findByRegion($region)
+    {
+        $query = $this->getList()
+            ->where('r.id = :region')
+            ->setParameter('region', $region)
+            ->orderBy('p.nom', "ASC")
+            ->addOrderBy('p.prenom', "ASC")
+            ->getQuery()->getResult()
+        ;
+
+        return $query;
+    }
+
 
     public function getList()
     {
@@ -71,10 +156,12 @@ class ParticipantRepository extends ServiceEntityRepository
             ->addSelect('r')
             ->addSelect('g')
             ->addSelect('d')
+            ->addSelect('t')
             ->leftJoin('p.activite', 'a')
             ->leftJoin('a.region', 'r')
             ->leftJoin('p.groupe', 'g')
-            ->leftJoin('g.district', 'd');
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('p.type', 't');
     }
 
     // /**
