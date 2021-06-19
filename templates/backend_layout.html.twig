@@ -109,7 +109,7 @@
                     </li>
 
                     <li class="has-submenu ">
-                        <a href="#"><i class="mdi mdi-basket-fill"></i>Finances</a>
+                        <a href="{{ path('backend_finance_index') }}"><i class="mdi mdi-basket-fill"></i>Finances</a>
                     </li>
 
                     <li class="has-submenu">
@@ -125,19 +125,17 @@
                         </ul>
                     </li>
 
-                    {% if is_granted('ROLE_DEV') %}
-                        <li class="has-submenu">
-                            <a href="#"><i class="mdi mdi-traffic-light"></i>Opérations</a>
-                            <ul class="submenu megamenu">
-                                <li>
-                                    <ul>
-                                        <li><a href="{{ path('backend_paiement_index', {'statut': 'VALID'}) }}">Validés</a></li>
-                                        <li><a href="{{ path('backend_paiement_index', {'statut': 'UNKNOW'}) }}">Non validés</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    {% endif %}
+                    <li class="has-submenu">
+                        <a href="#"><i class="mdi mdi-traffic-light"></i>Opérations</a>
+                        <ul class="submenu megamenu">
+                            <li>
+                                <ul>
+                                    <li><a href="{{ path('backend_paiement_index', {'statut': 'VALID'}) }}">Validées</a></li>
+                                    <li><a href="{{ path('backend_paiement_index', {'statut': 'UNKNOW'}) }}">Inachevées</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
 
 
                     {% if is_granted('ROLE_SUPER_ADMIN') %}

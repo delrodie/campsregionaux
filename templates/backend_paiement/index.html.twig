@@ -52,8 +52,8 @@
 
                                             </td>
                                             <td class="text-center">
-                                                {% if liste.statusPaiement == 'VALID' %} <span class="badge badge-success">{{ liste.statusPaiement }}</span>
-                                                {% else %} <span class="badge badge-danger">{{ liste.statusPaiement }}</span>
+                                                {% if liste.statusPaiement == 'VALID' %} <span class="badge badge-success">VALIDEE</span>
+                                                {% else %} <span class="badge badge-danger">INACHEVEE</span>
                                                 {% endif %}
                                             </td>
                                             <td class="text-center">{{ liste.created|date('Y-m-d H:i:s') }}</td>

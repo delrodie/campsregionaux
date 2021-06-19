@@ -30,7 +30,7 @@ class Utility
         if (!$regionId) $region = $this->session->get('region');
         else $region = $regionId;
 
-        $participants = $this->entityManager->getRepository(Participant::class)->findList($region);
+        $participants = $this->entityManager->getRepository(Participant::class)->findList($region); //dd($participants);
 
         $listes=[]; $i=0;
         foreach ($participants as $participant){
