@@ -5,6 +5,22 @@
     <meta content="text/html; charset=utf-8">
     <title>{{ scout.region }} ::  {{ scout.activite }}</title>
     <meta name="viewport" content="initial-scale=0.1">
+    <meta name="description" content="Je viens de m'inscrire au {{ scout.activite }}. Qu'as-tu pour m'y rejoindre?" />
+    <link rel="canonical" href="{{ absolute_url(path('app_search_matricule', {'region': scout.region_slug})) }}" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="Item" />
+    <meta property="og:title" content="{{ scout.region }} ::  {{ scout.activite }}" />
+    <meta property="og:description" content="Je viens de m'inscrire au {{ scout.activite }}. Qu'as-tu pour m'y rejoindre?" />
+    <meta property="og:url" content="{{ absolute_url(path('app_search_matricule', {'region': scout.region_slug})) }}" />
+    <meta property="og:site_name" content="ASCCI" />
+    <meta property="article:section" content="Item" />
+    <meta property="article:published_time" content="2021-06-20T15:25:59+00:00" />
+    <meta property="og:image" content="{{ absolute_url(asset('/assets/fontend/images/region/logo/'~ scout.config_logo)) }}" />
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:description" content="Je viens de m'inscrire au {{ scout.activite }}. Qu'as-tu pour m'y rejoindre?"/>
+    <meta name="twitter:title" content="{{ scout.region }} ::  {{ scout.activite }}"/>
+    <meta name="twitter:domain" content="ASCCI"/>
+    <meta name="twitter:image:src" content="{{ absolute_url(asset('/assets/fontend/images/region/logo/'~ scout.config_logo)) }}"/>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
     <style>
         body {
@@ -254,8 +270,10 @@
 
         }
     </style>
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60d09b48bae049001929f720&product=sop' async='async'></script>
 </head>
 <body>
+<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
 <div class="container" id="invoicePrint">
     <div class="invoice">
         <div class="row">
@@ -325,10 +343,10 @@
         </div>
     </div>
 </div>
-<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
+
 <a href="#" class="sicre no-print" id="badge" onclick="print()">
     <h5 class="my-float">Imprimer le badge</h5>
 </a>
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60d09b48bae049001929f720&product=sop' async='async'></script>
+
 </body>
 </html>

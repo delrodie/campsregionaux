@@ -68,6 +68,7 @@ class GestionRegion
                 'parent' => $participation->geturgence(),
                 'region' => $participation->getActivite()->getRegion()->getNom(),
                 'region_id' => $participation->getActivite()->getRegion()->getId(),
+                'region_slug' => $participation->getActivite()->getRegion()->getSlug(),
                 'config_couleurTheme' => $config->getCouleurTheme(),
                 'config_couleurRGB' => $config->getCouleurRGB(),
                 'config_bg' => $config->getBg(),
