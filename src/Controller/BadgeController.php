@@ -39,7 +39,7 @@ class BadgeController extends AbstractController
             $scout = $this->gestionRegion->badge($matricule, $regionSlug);
 
             if ($scout){
-                return $this->render('home/badge.html.twig',[
+                return $this->render('home/badge2.html.twig',[
                     'scout' => $scout,
                 ]);
             }else{

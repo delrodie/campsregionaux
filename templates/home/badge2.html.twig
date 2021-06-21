@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta content="text/html; charset=utf-8">
+    <title>{{ scout.region }} ::  {{ scout.activite }}</title>
+    <meta name="viewport" content="initial-scale=0.1">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background: #ccc;
+            padding: 30px;
+        }
+
+        .container {
+            width: 210mm;
+            height: 291mm;
+            background: #fff;
+        }
+
+        .invoice {
+            background: #fff;
+            width: 120mm;
+            height: 160mm;
+            border: 1px solid #ccc;
+            padding-top: 0px;
+            border-radius: 15px;
+            padding-left: -10px;
+        }
+
+
+        .impression .camp{
+            background-color: {{ scout.config_couleurTheme }};
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        .impression .camp .entete{
+            font-weight: bold;
+            font-size: 1.9rem;
+        }
+        .identite{
+            font-weight: bold;
+            overflow: hidden;
+            padding-top: 15px;
+            text-align: center;
+            white-space: nowrap;
+            width: 97%;
+            text-overflow: ellipsis;
+        }
+        .fonction{
+            font-weight: bold;
+            color: {{ scout.config_couleurTheme }};
+        }
+        .libelle{
+            font-size: 0.9rem;
+            color: #333;
+            font-style: italic;
+        }
+        .matricule{
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: darkred;
+        }
+        .carte{
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: darkblue;
+        }
+        .sexe, .district, .groupe{
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .photo{
+            margin: 10px 5px;
+            border: solid 1px #cccccc;
+            height: 200px;
+        }
+        .urgence{
+            -webkit-print-color-adjust: exact;
+            background-color: darkred;
+            color: white;
+        }
+        .label-urgence{
+            font-style: italic;
+        }
+        .contact-urgence{
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .cachet{
+            font-size: 0.7rem;
+            font-style: italic;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .commissaire{
+            font-size: 0.8rem;
+            padding: 0;
+            margin: 0;
+        }
+        .mention{
+            font-size: 0.65rem;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+
+        .sicre {
+            position: fixed;
+            width: 225px;
+            height: 50px;
+            bottom: 115px;
+            right: 60px;
+            background-color: {{ scout.config_couleurTheme }};
+            color: #FFF;
+            text-align: center;
+            box-shadow: 2px 2px 3px #999;
+        }
+
+        .sicre:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        .waz {
+            position: fixed;
+            width: 225px;
+            height: 50px;
+            bottom: 60px;
+            right: 60px;
+            background-color: orange;
+            color: #FFF;
+            text-align: center;
+            box-shadow: 2px 2px 3px #999;
+        }
+
+        .waz:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        .my-float {
+            margin-top: 13px;
+        }
+
+        @media  print {
+            .no-print, .no-print * {
+                display: none !important;
+            }
+            .invoice{
+                padding-top: 0;
+                border-radius: 15px;
+            }
+            .impression .camp{
+                background-color: {{ scout.config_couleurTheme }};
+                -webkit-print-color-adjust: exact;
+                color: white;
+                border-radius: 10px 10px 0 0;
+                width: 94%;
+                margin-left: 15px;
+            }
+            .impression .camp .entete{
+                font-weight: bold;
+            }
+            .identite{
+                font-weight: bold;
+                overflow: hidden;
+                padding-top: 15px;
+                text-align: center;
+                white-space: nowrap;
+                width: 90%;
+                text-overflow: ellipsis;
+            }
+            .fonction{
+                font-weight: bold;
+                color: {{ scout.config_couleurTheme }};
+                overflow: hidden;
+                padding-top: 0;
+                text-align: center;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .libelle{
+                font-size: 0.8rem;
+                color: #333;
+                font-style: italic;
+            }
+            .matricule{
+                font-weight: bold;
+                font-size: 1.2rem;
+                color: darkred;
+            }
+            .carte{
+                font-weight: bold;
+                font-size: 1.2rem;
+                color: darkblue;
+            }
+            .sexe, .district, .groupe{
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+            .photo{
+                border: solid 1px #cccccc;
+                margin: 10px 5px 0 15px;
+                padding-right: 10px;
+                height: 200px;
+            }
+            .info{
+                padding-left: 10px;
+            }
+            .urgence{
+                -webkit-print-color-adjust: exact;
+                background-color: darkred;
+                color: white;
+                width: 100mm;
+                margin-left: 15px;
+            }
+            .identite{
+                text-align: center;
+            }
+            .label-urgence{
+                font-style: italic;
+            }
+            .contact-urgence{
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+            .logo{
+                -webkit-print-color-adjust: exact;
+            }
+            .cachet{
+                font-size: 0.7rem;
+                font-style: italic;
+                margin-bottom: 0;
+                padding-bottom: 0;
+                margin-top: 20px;
+            }
+            .commissaire{
+                font-size: 0.8rem;
+                padding: 0;
+                margin: 0;
+            }
+            .mention{
+                font-size: 0.65rem;
+                font-style: italic;
+                font-weight: bold;
+                text-align: -webkit-center;
+            }
+            .row.footer div{
+                margin: 0;
+                padding: 0;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="invoicePrint">
+    <div class="invoice">
+        <div class="row">
+            <div class="col-sm-11 impression">
+                <div class="row">
+                    <div class="col-sm-12 camp text-center">
+                        <h1 class="entete">{{ scout.activite|upper }}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <h3 class="identite text-center" style="text-align:center;">{{ scout.identite }}</h3>
+                        <h5 class="fonction text-center">{{ scout.fonction }}</h5>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5 col-sm-4">
+                        <div class="row">
+                            <div class="col-11 col-sm-11 photo text-center">Photo</div>
+                        </div>
+                    </div>
+                    <div class="col-7 col-sm-8 info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <span class="libelle">Matricule :</span>
+                                <span class="matricule">{{ scout.matricule }}</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="libelle">Carte scoute N° :</span>
+                                <span class="carte">{{ scout.carte }}</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="libelle">Sexe :</span>
+                                <span class="sexe">{{ scout.sexe }}</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="libelle">District :</span> <br>
+                                <span class="district">{{ scout.district }}</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="libelle">Groupe :</span> <br>
+                                <span class="groupe">{{ scout.groupe }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12 col-sm-12 urgence text-center">
+                        <span class="label-urgence">En cas d'urgence :</span>
+                        <span class="contact-urgence">{{ scout.urgence }} </span>({{ scout.parent|title }})
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12 col-sm-12 text-center logo">
+                        <img src="{{ absolute_url(asset('/assets/fontend/images/region/logo/'~ scout.config_logo)) }}" alt="" width="120">
+                    </div>
+                </div>
+                <div class="row footer mt-2">
+                    <div class="col-12 col-sm-12 text-center">
+                        <div class="cachet text-center">Cachet et signature</div>
+                        <div class="commissaire text-center">Commissaire Régional</div>
+
+                        <div class="mt-1 mention text-center">Cette carte n'est valable que pendant la durée du camp et sur le site dudit.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
+<a href="#" class="sicre no-print" id="badge" onclick="print()">
+    <h5 class="my-float">Imprimer le badge</h5>
+</a>
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60d09b48bae049001929f720&product=sop' async='async'></script>
+</body>
+</html>
