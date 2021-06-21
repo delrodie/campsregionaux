@@ -82,7 +82,7 @@ class BackendParticipantController extends AbstractController
         $scout = $this->gestionRegion->badge($matricule,$region);
 
         if ($scout){
-            return $this->render('home/badge.html.twig',[
+            return $this->render('home/badge2.html.twig',[
                 'scout' => $scout,
             ]);
         }else{
