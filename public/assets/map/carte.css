@@ -1,0 +1,26 @@
+.map__image{
+}
+.map__image path{
+    stroke: #fff;
+    transition: fill .3s;
+}
+.map__image path:hover{
+    /**background: linear-gradient(60deg, rgba(255,77,0,1) 0%, rgba(255,255,255,1) 50%, rgba(61,174,43,1) 100%);**/
+    fill: rgb(255, 30, 0);
+;
+}
+.map__image .is-active path{
+    fill: rgb(255, 30, 0);
+}
+.map__list{
+}
+.map__list a{
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.map__list a.is-active{
+    color: rgb(255, 30, 0);
+    font-weight: bold;
+    text-decoration: underline;
+}
