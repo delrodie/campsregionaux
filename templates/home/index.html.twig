@@ -262,7 +262,7 @@
                 </div>
             </div>
             <div class="col-sm-8 col-xl-4 mt-5 d-none d-md-block">
-                <div class="information alert alert-danger" id="presentation"></div>
+                <div class="information2 alert alert-danger" id="presentation"></div>
             </div>
 
         </div>
@@ -314,6 +314,7 @@
                 {% for liste in listes %}
                 case '{{ liste.nom }}':
                     document.querySelector('.information').textContent = "{{ liste.message }}"
+                    document.querySelector('.information2').textContent = "{{ liste.message }}"
                     break;
                 {% endfor %}
                 default :
