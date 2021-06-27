@@ -35,7 +35,7 @@ class HomeController extends AbstractController
             $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region->getId()]);
             $time_debut = strtotime($activite->getDebut()); $debut = date('d/m/Y', $time_debut);
             $time_fin = strtotime($activite->getFin()); $fin = date('d/m/Y', $time_fin);
-            $message = "Denommé ".$activite->getNom().", le camp de vacances de la région de ".$region->getNom().", se tiendra du ".$debut." au ".$fin." à ".$activite->getLieu()." avec ".$participant." participants";
+            $message = "Denommé ".$activite->getNom().", le camp de vacances de la région de ".$region->getNom().", se tiendra du ".$debut." au ".$fin." à ".$activite->getLieu()." avec ".$participant." participant(s)";
 
             if (strtolower($region->getNom()) === 'grand bassam'){
                 $liste[$i++] = [
