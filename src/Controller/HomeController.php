@@ -33,9 +33,20 @@ class HomeController extends AbstractController
         foreach ($regions as $region){
             $participant = count($this->getDoctrine()->getRepository(Participant::class)->findByRegion($region->getId()));
             $activite = $this->getDoctrine()->getRepository(Activite::class)->findOneBy(['region'=>$region->getId()]);
+            $adulte = count($this->getDoctrine()->getRepository(Participant::class)->findByType('Adulte', $region->getId()));
+            $jeune = count($this->getDoctrine()->getRepository(Participant::class)->findByType('Jeune', $region->getId()));
             $time_debut = strtotime($activite->getDebut()); $debut = date('d/m/Y', $time_debut);
             $time_fin = strtotime($activite->getFin()); $fin = date('d/m/Y', $time_fin);
-            $message = "Denommé ".$activite->getNom().", le camp de vacances de la région de ".$region->getNom().", se tiendra du ".$debut." au ".$fin." à ".$activite->getLieu()." avec ".$participant." participant(s)";
+
+            // pluriel
+            if ($jeune <= 1) $jeuneText = $jeune." jeune";
+            else $jeuneText = $jeune." jeunes";
+            if ($adulte <= 1) $adulteText = $adulte." adulte";
+            else $adulteText = $adulte." adultes";
+            if ($participant <= 1) $participantText = $participant." participant";
+            else $participantText = $participant." participants";
+
+            $message = "Denommé ".$activite->getNom().", le camp de vacances de la région de ".$region->getNom().", se tiendra du ".$debut." au ".$fin." à ".$activite->getLieu()." avec ".$participantText.". Dont ".$jeuneText." et ".$adulteText;
 
             if (strtolower($region->getNom()) === 'grand bassam'){
                 $liste[$i++] = [

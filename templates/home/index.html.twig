@@ -265,6 +265,7 @@
                 <div class="information2 alert alert-danger" id="presentation"></div>
             </div>
 
+
         </div>
     </div>
 
@@ -313,8 +314,8 @@
             switch (id) {
                 {% for liste in listes %}
                 case '{{ liste.nom }}':
-                    document.querySelector('.information').textContent = "{{ liste.message }}"
-                    document.querySelector('.information2').textContent = "{{ liste.message }}"
+                    document.querySelector('.information').textContent = "{{ liste.message|raw }}"
+                    document.querySelector('.information2').textContent = "{{ liste.message|raw }}"
                     break;
                 {% endfor %}
                 default :
