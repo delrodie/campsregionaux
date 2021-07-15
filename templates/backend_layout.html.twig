@@ -105,7 +105,15 @@
                 <ul class="navigation-menu text-center">
 
                     <li class="has-submenu ">
-                        <a href="{{ path('backend_dashboard') }}"><i class="mdi mdi-view-dashboard"></i>Tableau de bord</a>
+                        <a href="#"><i class="mdi mdi-view-dashboard"></i>Tableau de bord</a>
+                        <ul class="submenu megamenu">
+                            <li>
+                                <ul>
+                                    <li><a href="{{ path('backend_dashboard') }}">Statistiques</a></li>
+                                    <li><a href="{{ path('backend_mapping_index') }}">Mapping</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="has-submenu ">

@@ -263,6 +263,9 @@
             </div>
             <div class="col-sm-8 col-xl-4 mt-5 d-none d-md-block">
                 <div class="information2 alert alert-danger" id="presentation"></div>
+                {% if is_granted('ROLE_USER') %}
+                    <a href="{{ absolute_url(path('backend_dashboard') )}}"><i class="fa fa-reply"></i> Retour au tableau de bord</a>
+                {% endif %}
             </div>
 
 
