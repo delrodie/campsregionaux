@@ -68,7 +68,7 @@ class ParticipantRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function findByType($type, $region=null)
+    public function findByType($type, $region=null, $district=null)
     {
         $query = $this->getList();
         if ($region){
@@ -81,7 +81,18 @@ class ParticipantRepository extends ServiceEntityRepository
                     'type' => $type
                 ])
             ;
-        }else{
+        }elseif ($district){
+            $query->where('d.id = :district')
+                ->andWhere('t.libelle = :type')
+                ->orderBy('p.nom', 'ASC')
+                ->addOrderBy('p.prenom', 'ASC')
+                ->setParameters([
+                    'district' => $district,
+                    'type' => $type
+                ])
+            ;
+        }
+        else{
             $query->where('t.libelle = :type')
                 ->orderBy('p.nom', 'ASC')
                 ->addOrderBy('p.prenom', 'ASC')

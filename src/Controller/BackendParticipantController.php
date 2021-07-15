@@ -90,6 +90,32 @@ class BackendParticipantController extends AbstractController
         }
 
     }
+
+    /**
+     * @Route("/type/{type}", name="backend_participant_type", methods={"GET"})
+     */
+    public function type(Request $request, $type)
+    {
+        $district = $request->get('district');
+        $listes = $this->utility->listeByType($type, $district);
+
+        if ($district){
+            $title = "Liste".$this->getDoctrine()->getRepository(District::class)->findOneBy(['id'=>$district])->getNom(). " des ".$type."s";
+        }else{
+            $title = "Liste globale des ".$type."s";
+        }
+
+        if ($this->session->get('region')) $districts = $this->utility->nombreParticipantParDistrict();
+        else $districts = $this->getDoctrine()->getRepository(District::class)->findBy([],['nom'=>"ASC"]);
+
+
+        return $this->render('backend_participant/type.html.twig', [
+            'listes' => $listes,
+            'districts' => $districts,
+            'title' => $title,
+            'type' => $type
+        ]);
+    }
     
 
 }

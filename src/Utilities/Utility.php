@@ -108,6 +108,35 @@ class Utility
         return $listes;
     }
 
+    public function listeByType($type, $district = null)
+    {
+        if ($this->session->get('region')) $region = $this->session->get('region');
+        else $region = null;
+
+        $participants = $this->entityManager->getRepository(Participant::class)->findByType($type, $region=null, $district=null);
+        $listes=[]; $i=0;
+        foreach ($participants as $participant){
+            $listes[$i++]=[
+                'matricule' => $participant->getMatricule(),
+                'carte' => $participant->getCarte(),
+                'nom' => $participant->getNom(),
+                'prenom' => $participant->getPrenom(),
+                'sexe' => $participant->getSexe(),
+                'fonction' => $participant->getFonction(),
+                'montant' => $participant->getActivite()->getMontant(),
+                'slug' => $participant->getSlug(),
+                'groupe' => $participant->getGroupe()->getParoisse(),
+                'district' => $participant->getGroupe()->getDistrict()->getNom(),
+                'districtSlug' => $participant->getGroupe()->getDistrict()->getSlug(),
+                'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'regionSlug' => $participant->getGroupe()->getDistrict()->getRegion()->getSlug(),
+                'created' => $participant->getCreatedAt(),
+            ];
+        }
+
+        return $listes;
+    }
+
     /**
      * Liste des nouveaux paiements
      * 

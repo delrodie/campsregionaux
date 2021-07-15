@@ -63,6 +63,13 @@
 
 
                     <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle arrow-none waves-effect" href="{{ path('backend_mapping_index') }}" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <i class="fa fa-map-marker"></i>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item dropdown notification-list">
                         {{ render(url('app_notification_index')) }}
                     </li>
                     <li class="list-inline-item dropdown notification-list">
@@ -125,8 +132,8 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="#">Jeunes</a></li>
-                                    <li><a href="#">Adultes</a></li>
+                                    <li><a href="{{ path('backend_participant_type', {'type': 'Jeune'}) }}">Jeunes</a></li>
+                                    <li><a href="{{ path('backend_participant_type', {'type': 'Adulte'}) }}">Adultes</a></li>
                                     <li><a href="{{ path('backend_participant_index') }}">Tous</a></li>
                                 </ul>
                             </li>
