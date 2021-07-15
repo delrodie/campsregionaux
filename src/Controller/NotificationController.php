@@ -48,20 +48,23 @@ class NotificationController extends AbstractController
         $listes = $this->utility->listeNouveauxParticipant(date('Y'),date('W'));
         $nombre = count($listes);
         $periode = $this->utility->week2str(date('Y'),date('W'));
+        $today = date('Y-m-d');
 
         // Utilisateur administrateur
         if (!$this->session->get('region')){
             return $this->render('notification/liste_admin.html.twig', [
                 'listes' => $listes,
                 'nombre' => $nombre,
-                'periode' => $periode
+                'periode' => $periode,
+                'aujourdhui' => $today
             ]);
         }
 
         return $this->render('notification/liste.html.twig', [
             'listes' => $listes,
             'nombre' => $nombre,
-            'periode' => $periode
+            'periode' => $periode,
+            'aujourdhui' => $today
         ]);
     }
 

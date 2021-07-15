@@ -1,6 +1,6 @@
 {% extends 'backend_layout.html.twig' %}
 
-{% block title %}{{ parent() }} Inscriptions du {{ periode.debut|date('d-m-Y') }} au {{ aujourdhui|date('d-m-Y') }}{% endblock %}
+{% block title %}{{ parent() }} {{ title}} {% endblock %}
 
 {% block body %}
     <div class="wrapper">
@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-12 mt-5">
                     <div class="page-title-box">
-                        <h4 class="page-title">LISTE DES PARTICIPANTS</h4>
+                        <h4 class="page-title">{{ title|upper }}</h4>
                     </div>
                 </div>
             </div>
@@ -18,19 +18,36 @@
                 <div class="col-sm-12 col-md-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <h5 class="header-title mb-3 mt-0 text-center">Les inscriptions du {{ periode.debut|date('d-m-Y') }} au {{ aujourdhui|date('d-m-Y') }}</h5>
+                            <div class="row mt-5">
+                                <div class="col-md-12 col-xl-6 offset-xl-3 text-center">
+                                    <div class="row">
+                                        <div class="col-sm-4 text-right"><label for="">Filtrez</label></div>
+                                        <div class="col-sm-8">
+                                            <form action="#" onchange="this.submit()">
+                                                <select name="district" id="" class="form-control select">
+                                                    <option value="">-- Selectionnez le dictrict --</option>
+                                                    <option value=""></option>
+                                                    {% for district in districts %}
+                                                        <option value="{{ district.id }}">{{ district.nom }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             <div class="table-responsive mt-5">
                                 <table id="liste" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
                                         <th class="border-top-0 text-center">#</th>
-                                        <th class="border-top-0 text-center">REGION</th>
+                                        <th class="border-top-0 text-center">DISTRICT</th>
+                                        <th class="border-top-0 text-center">GROUPE</th>
                                         <th class="border-top-0 text-center">MATRICULE</th>
+                                        <th class="border-top-0 text-center">CARTE</th>
                                         <th class="border-top-0 text-center">NOM & PRENOMS</th>
                                         <th class="border-top-0 text-center">FONCTION</th>
-                                        <th class="border-top-0 text-center">TEL PAIMENT</th>
-                                        <th class="border-top-0 text-center">ID TRANSACTIONS</th>
-                                        <th class="border-top-0 text-center">STATUT</th>
                                         <th class="border-top-0 text-center">DATE</th>
                                     </tr>
                                     </thead>
@@ -38,24 +55,12 @@
                                     {% for liste in listes %}
                                         <tr>
                                             <td>{{ loop.index }}</td>
-                                            <td>{{ liste.region }}</td>
+                                            <td>{{ liste.district }}</td>
+                                            <td>{{ liste.groupe }}</td>
                                             <td class="text-center">{{ liste.matricule }}</td>
+                                            <td class="text-center">{{ liste.carte }}</td>
                                             <td>{{ liste.nom|upper }} {{ liste.prenom|title }}</td>
                                             <td>{{ liste.fonction }}</td>
-                                            <td class="text-center">{{ liste.paieTelephone ? liste.paieTelephone : '-' }}</td>
-                                            <td class="text-center">
-                                                {% if liste.statusPaiement != 'VALID' %}
-                                                    <a href="{{ path('backend_paiement_show', {'idTransaction': liste.idTransaction, 'region': liste.region, 'regionId': liste.regionId}) }}" target="_blank">{{ liste.idTransaction }}</a>
-                                                {% else %}
-                                                    {{ liste.idTransaction }}
-                                                {% endif %}
-
-                                            </td>
-                                            <td class="text-center">
-                                                {% if liste.statusPaiement == 'VALID' %} <span class="badge badge-success">VALIDEE</span>
-                                                {% else %} <span class="badge badge-danger">INACHEVEE</span>
-                                                {% endif %}
-                                            </td>
                                             <td class="text-center">{{ liste.created|date('Y-m-d H:i:s') }}</td>
                                         </tr>
                                     {% endfor %}

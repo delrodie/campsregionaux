@@ -47,6 +47,8 @@ class Utility
                 'district' => $participant->getGroupe()->getDistrict()->getNom(),
                 'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
                 'regionSlug' => $participant->getGroupe()->getDistrict()->getRegion()->getSlug(),
+                'created' => $participant->getCreatedAt(),
+                'statut' => $participant->getStatut(),
             ];
         }
 
@@ -73,6 +75,33 @@ class Utility
                 'districtSlug' => $participant->getGroupe()->getDistrict()->getSlug(),
                 'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
                 'regionSlug' => $participant->getGroupe()->getDistrict()->getRegion()->getSlug(),
+            ];
+        }
+
+        return $listes;
+    }
+
+    public function listeByDistrict($district)
+    {
+        $participants = $this->entityManager->getRepository(Participant::class)->findListByDistrict($district);
+
+        $listes=[]; $i=0;
+        foreach ($participants as $participant){
+            $listes[$i++]=[
+                'matricule' => $participant->getMatricule(),
+                'carte' => $participant->getCarte(),
+                'nom' => $participant->getNom(),
+                'prenom' => $participant->getPrenom(),
+                'sexe' => $participant->getSexe(),
+                'fonction' => $participant->getFonction(),
+                'montant' => $participant->getActivite()->getMontant(),
+                'slug' => $participant->getSlug(),
+                'groupe' => $participant->getGroupe()->getParoisse(),
+                'district' => $participant->getGroupe()->getDistrict()->getNom(),
+                'districtSlug' => $participant->getGroupe()->getDistrict()->getSlug(),
+                'region' => $participant->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'regionSlug' => $participant->getGroupe()->getDistrict()->getRegion()->getSlug(),
+                'created' => $participant->getCreatedAt(),
             ];
         }
 

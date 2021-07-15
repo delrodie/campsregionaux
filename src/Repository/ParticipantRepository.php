@@ -164,6 +164,24 @@ class ParticipantRepository extends ServiceEntityRepository
             ->leftJoin('p.type', 't');
     }
 
+    /**
+     * Liste par district
+     *
+     * @param $district
+     * @return int|mixed|string
+     */
+    public function findListByDistrict($district)
+    {
+        $query = $this->getList()
+            ->where('d.id = :district')
+            ->setParameter('district', $district)
+            ->orderBy('p.createdAt', "ASC")
+            ->getQuery()->getResult()
+        ;
+
+        return $query;
+    }
+
     // /**
     //  * @return Participant[] Returns an array of Participant objects
     //  */
