@@ -46,7 +46,8 @@ class HomeController extends AbstractController
             if ($participant <= 1) $participantText = $participant." participant";
             else $participantText = $participant." participants";
 
-            $message = "Denommé ".$activite->getNom().", le camp de vacances de la région de ".$region->getNom().", se tiendra du ".$debut." au ".$fin." à ".$activite->getLieu()." avec ".$participantText.". Dont ".$jeuneText." et ".$adulteText;
+            //$message = "Denommé ".$activite->getNom().", le camp de vacances de la région de ".$region->getNom().", se tiendra du ".$debut." au ".$fin." à ".$activite->getLieu()." avec ".$participantText.". Dont ".$jeuneText." et ".$adulteText;
+            $message = "Denommé ".$activite->getNom().", le camp de vacances de la région de ".$region->getNom().", se tiendra du ".$debut." au ".$fin." à ".$activite->getLieu();
 
             if (strtolower($region->getNom()) === 'grand bassam'){
                 $liste[$i++] = [

@@ -36,12 +36,15 @@ class ListeController extends AbstractController
         if ($district){
             $listes = $this->utility->listeByDistrict($district);
             $title = "Liste ".$this->getDoctrine()->getRepository(District::class)->findOneBy(['id'=>$district])->getNom();
-            $districts = $this->utility->nombreParticipantParDistrict();
+
         }else{
             $listes = $this->utility->listeParticipants();
             $title = "Liste globale des participants";
-            $districts = $this->getDoctrine()->getRepository(District::class)->findBy([],['nom'=>"ASC"]);
-        } //dd($listes);
+
+        }
+
+        if ($this->session->get('region')) $districts = $this->utility->nombreParticipantParDistrict();
+        else $districts = $this->getDoctrine()->getRepository(District::class)->findBy([],['nom'=>"ASC"]);
 
         return $this->render('liste/index.html.twig', [
             'listes' => $listes,
