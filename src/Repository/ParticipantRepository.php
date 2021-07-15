@@ -69,9 +69,9 @@ class ParticipantRepository extends ServiceEntityRepository
     }
 
     public function findByType($type, $region=null, $district=null)
-    {
+    { //dd($district);
         $query = $this->getList();
-        if ($region){
+        if ($region && !$district){
             $query->where('r.id = :region')
                 ->andWhere('t.libelle = :type')
                 ->orderBy('p.nom', 'ASC')

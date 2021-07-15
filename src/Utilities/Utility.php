@@ -108,12 +108,14 @@ class Utility
         return $listes;
     }
 
-    public function listeByType($type, $district = null)
+    public function listeByType($type, $district)
     {
         if ($this->session->get('region')) $region = $this->session->get('region');
         else $region = null;
+        //dd($region);
+        //dd($district);
 
-        $participants = $this->entityManager->getRepository(Participant::class)->findByType($type, $region=null, $district=null);
+        $participants = $this->entityManager->getRepository(Participant::class)->findByType($type, $region, $district);
         $listes=[]; $i=0;
         foreach ($participants as $participant){
             $listes[$i++]=[
