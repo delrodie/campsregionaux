@@ -52,6 +52,11 @@ class SearchController extends AbstractController
      */
     public function matricule(Request $request, Region $region)
     {
+        $date = date('Ymd H:i:s');
+        if ($date <= '20210730 18:59:59'){
+            return $this->render('home/maintenance.html.twig');
+        }
+
         // Formulaire de recherche
         $search = new Scout();
         $form = $this->createForm(SearchMatriculeType::class, $search);

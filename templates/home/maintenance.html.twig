@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    <section class="section">
+        <div class="container">
+            <img src="{{ absolute_url(asset('/assets/ascci.png')) }}" class="img-fluid d-block mx-auto" alt="" width="250">
+            <h1 class="title text-center font-weight-bold mt-4">Désolé !!!!! <br> La plateforme est en maintenance. </h1>
+            <h4 class="title text-center font-weight-bold mt-4"><em>Mise en service à partir de 20h</em></h4>
+
+            <div class="d-flex justify-content-center mt-lg-5 mt-4">
+                <img src="{{ absolute_url(asset('assets/sorry.png')) }}" class="img-fluid d-block mx-auto"  alt="" width="125">
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+    Site en maintenance
+{% endblock %}
+
