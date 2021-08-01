@@ -1,0 +1,14 @@
+<div class="general-label">
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_widget(form.nom) }}
+            {{ form_errors(form.nom)}}
+        </div>
+    {{ form_widget(form) }}
+        <div class="text-right mt-5">
+            <a href="{{ path('backend_paiement_index', {'statut': 'UNKNOW'}) }}" class="btn btn-outline-secondary btn-raised mb-0">Annuler</a>
+            <button class="btn btn-primary btn-raised mb-0">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+
+    {{ form_end(form) }}
+</div>
