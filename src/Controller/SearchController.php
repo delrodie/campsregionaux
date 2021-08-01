@@ -52,10 +52,13 @@ class SearchController extends AbstractController
      */
     public function matricule(Request $request, Region $region)
     {
-        $date = date('Ymd H:i:s');
-        if ($date <= '20210730 18:59:59'){
-            return $this->render('home/maintenance.html.twig');
+        if ($region->getSlug() === '11-grand-bassam'){
+            $date = date('Ymd H:i:s');
+            if ($date <= '20210801 13:59:59'){
+                return $this->render('home/close_bassam.html.twig');
+            }
         }
+
 
         // Formulaire de recherche
         $search = new Scout();
