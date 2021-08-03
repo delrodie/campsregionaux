@@ -59,7 +59,7 @@ class SearchController extends AbstractController
             }
         }
 
-        if ($region->getSlug() === '18-yopougon' && $date >= '20210803 23:59:59' && $date <= '20210806 19:59:59')
+        if ($region->getSlug() === '18-yopougon' && $date >= '20210803 13:59:59' && $date <= '20210806 19:59:59')
         {
             return $this->render('home/close_yop.html.twig');
         }
