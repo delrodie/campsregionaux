@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    <section class="section">
+        <div class="container">
+            <img src="{{ absolute_url(asset('/upload/activite/yopougon.png')) }}" class="img-fluid d-block mx-auto" alt="" width="250">
+            <h1 class="title text-center font-weight-bold mt-4">Oups !!!!! <br> La plateforme d'inscription est fermée. </h1>
+            <h4 class="title text-center font-weight-bold mt-4"><em>Veuillez contacter l'équipe régionale</em></h4>
+
+            <div class="d-flex justify-content-center mt-lg-5 mt-4">
+                <img src="{{ absolute_url(asset('assets/sorry.png')) }}" class="img-fluid d-block mx-auto"  alt="" width="125">
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+    Fin des inscriptions
+{% endblock %}
+
