@@ -52,18 +52,14 @@ class SearchController extends AbstractController
      */
     public function matricule(Request $request, Region $region)
     {
+
         $date = date('Ymd H:i:s');
-        if ($region->getSlug() === '11-grand-bassam'){
-            if ($date <= '20210801 13:59:59'){
-                return $this->render('home/close_bassam.html.twig');
-            }
-        }
 
-        if ($region->getSlug() === '18-yopougon' && $date >= '20210803 23:59:59' && $date <= '20210806 19:59:59')
-        {
+        $activite = $this->gestionRegion->fermeture($region->getId()); //dd($activite);
+        if ($activite) return $this->render('home/close_camp.html.twig',[ 'activite'=> $activite]);
+
+        if ($region->getSlug() === '18-yopougon' && $date >= '20210803 23:59:59' && $date <= '20210805 11:59:59')
             return $this->render('home/close_yop.html.twig');
-        }
-
 
         // Formulaire de recherche
         $search = new Scout();
@@ -103,7 +99,16 @@ class SearchController extends AbstractController
      * @Route("/{region}/mon-matricule", name="app_search_civil", methods={"GET","POST"})
      */
     public function civil(Request $request, Region $region)
-    { //dd($region);
+    {
+        $date = date('Ymd H:i:s');
+
+        $activite = $this->gestionRegion->fermeture($region->getId()); //dd($activite);
+        if ($activite) return $this->render('home/close_camp.html.twig',[ 'activite'=> $activite]);
+
+        if ($region->getSlug() === '18-yopougon' && $date >= '20210803 23:59:59' && $date <= '20210805 11:59:59')
+            return $this->render('home/close_yop.html.twig');
+
+        
         // Formulaire de recherche
         $search = new Scout();
         $form = $this->createForm(SearchCivilType::class, $search);
@@ -147,4 +152,6 @@ class SearchController extends AbstractController
             'civil' => true,
         ]);
     }
+
+
 }

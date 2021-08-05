@@ -329,6 +329,20 @@ class GestionRegion
         return $render;
     }
 
+    public function fermeture($region)
+    {
+        $date = date('Y-m-d');
+
+        $activite = $this->entityManager->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]); //dd($activite);
+
+        // Si la date debut activité est inférieure a la date du jour alors fermeture
+        if($activite->getDebut() < $date) {
+            return $activite;
+        }else{
+            return false;
+        }
+    }
+
     public function montantParticipation($region)
     {
         $activite = $this->entityManager->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]);
@@ -350,4 +364,6 @@ class GestionRegion
     {
         return ceil($nombre / $arrondi) * $arrondi;
     }
+
+
 }
