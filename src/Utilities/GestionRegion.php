@@ -9,6 +9,7 @@ use App\Entity\Config;
 use App\Entity\Participant;
 use App\Entity\Sygesca\Region;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Integer;
 
 class GestionRegion
 {
@@ -333,10 +334,24 @@ class GestionRegion
     {
         $date = date('Y-m-d');
 
+        //if($region === 5) return false;
+
         $activite = $this->entityManager->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]); //dd($activite);
 
+        $debut = $activite->getDebut();
+        $jour = intval(date('d',strtotime($activite->getDebut()))); //dd($jour);
+        if($jour < 5){
+            $cal = $jour+4;
+            $jour = "0".$cal;
+        }else{
+            $jour = $jour+4;
+        }
+
+        $delai = date('Y',strtotime($debut)).'-'.date('m',strtotime($debut)).'-'.$jour;
+        //dd($delai);
+
         // Si la date debut activité est inférieure a la date du jour alors fermeture
-        if($activite->getDebut() < $date) {
+        if($delai< $date) {
             return $activite;
         }else{
             return false;
