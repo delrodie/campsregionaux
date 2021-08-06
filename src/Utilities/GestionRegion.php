@@ -334,17 +334,17 @@ class GestionRegion
     {
         $date = date('Y-m-d');
 
-        //if($region === 5) return false;
+        if($region === 5) return false;
 
         $activite = $this->entityManager->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]); //dd($activite);
 
         $debut = $activite->getDebut();
         $jour = intval(date('d',strtotime($activite->getDebut()))); //dd($jour);
-        if($jour < 5){
-            $cal = $jour+4;
+        if($jour < 7){
+            $cal = $jour+2;
             $jour = "0".$cal;
         }else{
-            $jour = $jour+4;
+            $jour = $jour+2;
         }
 
         $delai = date('Y',strtotime($debut)).'-'.date('m',strtotime($debut)).'-'.$jour;
