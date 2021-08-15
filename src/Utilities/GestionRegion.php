@@ -334,7 +334,7 @@ class GestionRegion
     {
         $date = date('Y-m-d');
 
-        if($region === 5) return false;
+        if($region === 18) return false;
 
         $activite = $this->entityManager->getRepository(Activite::class)->findOneBy(['region'=>$region], ['id'=>"DESC"]); //dd($activite);
 
